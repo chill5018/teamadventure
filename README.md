@@ -32,3 +32,5 @@ Click apply and ok
 
 
 If not try to right click on the Pom.xml file and select maven then select reimport
+
+Test at http://localhost:4567/hello
