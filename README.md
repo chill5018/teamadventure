@@ -1,36 +1,48 @@
 # teamadventure
 
-Getting Started
+Requirements
+-----------
+- Gradle 1.7
+- On Mac (`brew install gradle`)
+- On Windows check out `http://codetutr.com/2013/03/23/how-to-install-gradle/`
 
-1. Download Source Tree 
+The `brew` command is available on OS X after you have installed [Homebrew]
 
-2.  'git pull https://github.com/chill5018/teamadventure.git'
+[Homebrew]: http://brew.sh/
 
-3. Save to directory on your computer 
-
-
-4. Open IntelliJ, select project
-
-5. Click on Maven in right toolbar, and click the green add button
-
-6. Select the pom.xml file
-
-7. Go to File -> Project Settings
-
-Select JDK
-
-Select directory path then add \out
-
-8. In left menu select modules. 
-
-Select, main Java then click on the blue sources folder
-
-Click apply and ok
-
-9. You should be able to run the main Java application 
+Initial Set Up
+---------------
+1. Clone this repo: `git clone https://github.com/chill5018/teamadventure.git` (if you haven't already done that)
+1. Launch IntelliJ, select Open 
+1. Go into the repo directory, and select: `teamadventure`, click ok
 
 
+### On Windows (cmd.exe terminal)
 
-If not try to right click on the Pom.xml file and select maven then select reimport
+1. Clone this repo: `git clone git clone https://github.com/chill5018/teamadventure.git` (if you haven't already done that)
+1. Go into the repo directory : `cd peergrade.io`
+1. Create virtualenv: `virtualenv .venv`
+1. Activate virtualenv: `.venv\Scripts\activate`
+1. Install Python packages: `pip install -r requirements.txt`
+1. Install Python packages for developers: `pip install -r requirements_dev.txt`
+1. Install npm packages: `npm install`
+1. Install Bower, Browserify, Brunch, and Foreman `npm install -g bower browserify brunch foreman`
+1. Install bower packages: `bower install`
+1. (Optional) Install terminal-notifier (on OSX: `brew install terminal-notifier`)
 
-Test at http://localhost:4567/hello
+Build
+-----
+Run
+
+    gradle run
+
+
+Build
+-----
+Test
+
+    gradle test
+
+
+
+See your hard work at http://localhost:4567/
