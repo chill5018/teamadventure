@@ -20,15 +20,7 @@ Initial Set Up
 ### On Windows (cmd.exe terminal)
 
 1. Clone this repo: `git clone git clone https://github.com/chill5018/teamadventure.git` (if you haven't already done that)
-1. Go into the repo directory : `cd peergrade.io`
-1. Create virtualenv: `virtualenv .venv`
-1. Activate virtualenv: `.venv\Scripts\activate`
-1. Install Python packages: `pip install -r requirements.txt`
-1. Install Python packages for developers: `pip install -r requirements_dev.txt`
-1. Install npm packages: `npm install`
-1. Install Bower, Browserify, Brunch, and Foreman `npm install -g bower browserify brunch foreman`
-1. Install bower packages: `bower install`
-1. (Optional) Install terminal-notifier (on OSX: `brew install terminal-notifier`)
+1. To be continued...
 
 Build
 -----
