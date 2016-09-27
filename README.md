@@ -38,3 +38,7 @@ Test
 
 
 See your hard work at http://localhost:4567/
+
+### Helpful Resources 
+
+Videos: https://sparktutorials.github.io/2015/08/04/spark-video-tutorials.html 
