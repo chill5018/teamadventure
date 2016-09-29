@@ -9,6 +9,9 @@ public class Activity {
     private double price;
     private int time;
 
+    private static ArrayList<Activity> instances = new ArrayList<Activity>();
+    private int id;
+
     public String getName() {
         return name;
     }
@@ -56,7 +59,17 @@ public class Activity {
     public void setTime(int time) {
         this.time = time;
     }
+    public static List<Customer> all() {
+      return instances;
+    }
 
+    public static void clear() {
+      instances.clear();
+    }
+
+    public int getId() {
+     return mId;
+    }
 
     public Activity(String name, String place, double price, int time, int capacity, int minAge){
         this.name = name;
