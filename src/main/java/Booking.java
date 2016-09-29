@@ -28,5 +28,4 @@ public class Booking() {
     return selectedActivity.getPrice() * customer.getNumPeople();
   }
 
-
 }
