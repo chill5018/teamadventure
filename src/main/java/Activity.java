@@ -1,6 +1,10 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Filip on 29-09-2016.
  */
+
 public class Activity {
     private String name;
     private String place;
@@ -68,7 +72,7 @@ public class Activity {
     }
 
     public int getId() {
-     return mId;
+     return id;
     }
 
     public Activity(String name, String place, double price, int time, int capacity, int minAge){
@@ -78,5 +82,6 @@ public class Activity {
         this.time = time;
         this.capacity = capacity;
         this.minAge = minAge;
+        this.id = instances.size();
     }
 }
