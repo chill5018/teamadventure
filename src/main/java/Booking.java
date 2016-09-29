@@ -1,6 +1,7 @@
+import java.util.ArrayList;
+import java.util.Date;
 
-
-public class Booking() {
+public class Booking {
   private Activity selectedActivity;
   private Customer customer;
   private Company company;
@@ -25,7 +26,7 @@ public class Booking() {
   }
 
   public double getTotalPrice() {
-    return selectedActivity.getPrice() * customer.getNumPeople();
+    return selectedActivity.getPrice() * customer.getNumOfPeople();
   }
 
 }

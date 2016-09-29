@@ -23,8 +23,6 @@ public class Customer {
         this.telNum = telNum;
         this.age = age;
         this.reservationDate = reservationDate;
-
-
     }
 
     public String geteMail() {
@@ -75,8 +73,8 @@ public class Customer {
         this.reservationDate = reservationDate;
     }
 
-    public int getNumPeople() {
-      return numPeople;
+    public int getNumOfPeople() {
+      return numOfPeople;
     }
 
 }

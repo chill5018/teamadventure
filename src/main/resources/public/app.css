@@ -1,0 +1,27 @@
+// Default Global Styles
+.btn-blue {
+  background-color: #2F70E0;
+  color: #ffffff;
+}
+
+button .btn-grey {
+  background-color: #9c9c9c;
+}
+
+
+// Booking Page
+
+.new-booking__main {
+
+}
+
+.new-booking__company-button {
+  margin-bottom: 10px;
+  margin-top: 10px;
+
+}
+
+.new-booking__individual-button {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
