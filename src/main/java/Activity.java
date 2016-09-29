@@ -59,7 +59,7 @@ public class Activity {
     public void setTime(int time) {
         this.time = time;
     }
-    public static List<Customer> all() {
+    public static List<Activity> all() {
       return instances;
     }
 
