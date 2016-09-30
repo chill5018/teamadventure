@@ -17,11 +17,12 @@ public class Customer {
 
     }
 
-    public Customer(String fName, String lName, int telNum, String reservationDate, int age) {
+    public Customer(String fName, String lName, int telNum, String reservationDate, int age, int numOfPeople) {
         this.fName = fName;
         this.lName = lName;
         this.telNum = telNum;
         this.age = age;
+        this.numOfPeople = numOfPeople;
         this.reservationDate = reservationDate;
     }
 

@@ -10,9 +10,10 @@ public class Company extends Customer {
     private static ArrayList<Customer> instances = new ArrayList<>();
     private int id;
 
-    public Company(String fName, String lName, int telNum, String reservationDate, int age)
+    public Company(String fName, String lName, int telNum, String reservationDate, int age, int numOfPeople)
     {
-        super(fName, lName, telNum, reservationDate, age);
+        super(fName, lName, telNum, reservationDate, age, numOfPeople);
+        this.id = instances.size();
 
     }
 
