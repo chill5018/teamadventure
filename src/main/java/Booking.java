@@ -1,6 +1,6 @@
+import java.util.*;
 
-
-public class Booking() {
+public class Booking {
   private Activity selectedActivity;
   private Customer customer;
   private Company company;
@@ -24,8 +24,21 @@ public class Booking() {
     return customer;
   }
 
+
+  public static List<Booking> all() {
+    return instances;
+  }
+
+  public static void clear() {
+    instances.clear();
+  }
+
+  public int getId() {
+   return id;
+  }
+
   public double getTotalPrice() {
-    return selectedActivity.getPrice() * customer.getNumPeople();
+    return selectedActivity.getPrice() * customer.getNumOfPeople();
   }
 
 }

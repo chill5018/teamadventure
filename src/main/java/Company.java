@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 
 /**
  * Created by Benny and Dan on 9/29/2016.
@@ -7,12 +7,13 @@ import java.util.Date;
 public class Company extends Customer {
     private String compName;
     private int numPeople;
-    private static ArrayList<Customer> instances = new ArrayList<>();
+    private static ArrayList<Company> instances = new ArrayList<>();
     private int id;
 
     public Company(String fName, String lName, int telNum, String reservationDate, int age)
     {
         super(fName, lName, telNum, reservationDate, age);
+        this.id = instances.size();
 
     }
 
@@ -32,19 +33,16 @@ public class Company extends Customer {
         this.numPeople = numPeople;
     }
 
-    public static ArrayList<Customer> getInstances() {
-        return instances;
+
+    public static List<Company> allCompany() {
+      return instances;
     }
 
-    public static void setInstances(ArrayList<Customer> instances) {
-        Company.instances = instances;
+    public static void clear() {
+      instances.clear();
     }
 
     public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+     return id;
     }
 }
