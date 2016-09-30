@@ -1,5 +1,5 @@
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
 
 /**
  * Created by ClaudiuRBC and Gosia on 9/29/2016.
@@ -13,6 +13,9 @@ public class Customer {
     private int age;
     private int numOfPeople;
 
+    private static ArrayList<Customer> instances = new ArrayList<Customer>();
+    private int id;
+
     public Customer() {
 
     }
@@ -25,6 +28,8 @@ public class Customer {
         this.age = age;
         this.numOfPeople = numOfPeople;
         this.reservationDate = reservationDate;
+        this.id = instances.size();
+
     }
 
     public String getEmail() {
@@ -77,6 +82,18 @@ public class Customer {
 
     public int getNumOfPeople() {
       return numOfPeople;
+    }
+
+    public static List<Customer> allCustomers() {
+      return instances;
+    }
+
+    public static void clear() {
+      instances.clear();
+    }
+
+    public int getId() {
+     return id;
     }
 
 }

@@ -1,5 +1,8 @@
+<<<<<<< 385fb2d125ad54c53dd4cf1b4f1c98b5b97adb0b
 import java.util.ArrayList;
 import java.util.Date;
+=======
+import java.util.*;
 
 public class Booking {
   private Activity selectedActivity;
@@ -31,6 +34,22 @@ public class Booking {
 
   public double getTotalPriceCompany() {
     return selectedActivity.getPrice() * company.getNumOfPeople();
+
+
+  public static List<Booking> all() {
+    return instances;
+  }
+
+  public static void clear() {
+    instances.clear();
+  }
+
+  public int getId() {
+   return id;
+  }
+
+  public double getTotalPrice() {
+    return selectedActivity.getPrice() * customer.getNumOfPeople();
   }
 
 }

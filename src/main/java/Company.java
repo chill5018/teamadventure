@@ -1,13 +1,14 @@
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 
 /**
  * Created by Benny and Dan on 9/29/2016.
  */
 public class Company extends Customer {
     private String compName;
-    private int numPeople=1;
-    private static ArrayList<Customer> instances = new ArrayList<>();
+
+    private int numPeople;
+    private static ArrayList<Company> instances = new ArrayList<>();
     private int id;
 
     public Company(String compName, String fName, String lName, String telNum, String email, String reservationDate, int age, int numOfPeople)
@@ -34,19 +35,16 @@ public class Company extends Customer {
         this.numPeople = numPeople;
     }
 
-    public static ArrayList<Customer> getInstances() {
-        return instances;
+
+    public static List<Company> allCompany() {
+      return instances;
     }
 
-    public static void setInstances(ArrayList<Customer> instances) {
-        Company.instances = instances;
+    public static void clear() {
+      instances.clear();
     }
 
     public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+     return id;
     }
 }
