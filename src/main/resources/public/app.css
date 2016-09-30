@@ -1,4 +1,9 @@
 // Default Global Styles
+
+body {
+  background-color: #000;
+}
+
 .btn-blue {
   background-color: #2F70E0;
   color: #ffffff;
@@ -9,19 +14,70 @@ button .btn-grey {
 }
 
 
-// Booking Page
+// Page Headers -- Default
 
-.new-booking__main {
-
+.main-header-container {
+  text-align: center;
 }
 
-.new-booking__company-button {
+.main-header-title {
+  text-align: center;
+}
+
+.main-header-subtitle {
+  text-align: center;
+}
+
+
+.form {
+  max-width: 500px;
+}
+
+
+// Home page
+
+.main-wrapper {
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.main-view__activities-button {
   margin-bottom: 10px;
   margin-top: 10px;
+
+}
+.main-view__bookings-button {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  text-align: right
+}
+
+.main-view__previous-bookings-button {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.previous-bookings-button {
+  width: 262px
+}
+
+
+
+// Booking Page
+
+
+.new-booking__main {
 
 }
 
 .new-booking__individual-button {
   margin-bottom: 10px;
   margin-top: 10px;
+  text-align: right;
+}
+.new-booking__company-button {
+  margin-bottom: 10px;
+  margin-top: 10px;
+
 }

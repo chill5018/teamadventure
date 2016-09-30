@@ -1,6 +1,5 @@
-<h1>Activity Zone</h1>
-<p>Family / Individal Booking</p>
-<form action='/individuals/new' method='get'>
+<p class="main-header-subtitle">Family Booking</p>
+<form action='/bookings/new/create-family' method='get'>
   <div class="form-group">
     <label for="first_name">First Name</label>
     <input id="first_name" name="first_name" class="form-control" type="text">
@@ -25,6 +24,6 @@
     <label for="email">Email</label>
     <input id="email" name="email" class="form-control" type="email">
   </div>
-  <button type="cancel" class="btn">Go Back</button>
-  <button type="submit" class="btn">Continue</button>
+  <a href="/bookings/new/choose-customer-type" class="btn btn-grey">Go Back</a>
+  <button type="submit" class="btn btn-blue">Continue</button>
 </form>
