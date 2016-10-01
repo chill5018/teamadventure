@@ -7,7 +7,7 @@ import java.util.Date;
 public class Customer {
     private String fName;
     private String lName;
-    private int telNum;
+    private String telNum;
     private String reservationDate;
     private String eMail;
     private int age;
@@ -17,7 +17,7 @@ public class Customer {
 
     }
 
-    public Customer(String fName, String lName, int telNum, String reservationDate, int age, int numOfPeople) {
+    public Customer(String fName, String lName, String telNum, String reservationDate, int age, int numOfPeople) {
         this.fName = fName;
         this.lName = lName;
         this.telNum = telNum;
@@ -58,11 +58,11 @@ public class Customer {
         this.lName = lName;
     }
 
-    public int getTelNum() {
+    public String getTelNum() {
         return telNum;
     }
 
-    public void setTelNum(int telNum) {
+    public void setTelNum(String telNum) {
         this.telNum = telNum;
     }
 
