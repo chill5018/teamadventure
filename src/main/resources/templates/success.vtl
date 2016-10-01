@@ -1,13 +1,8 @@
-<h1>Success!</h1>
-#if ($customers)
-  <ul>
-    #foreach ($customer in $customers)
-      <li>$customer.getfName()</li>
-    #end
-  </ul>
-#else
-  <p>No customers!</p>
-#end
 
+<p>
 Your customer has been saved.
+</p>
 <a href="/">Go Back</a>
+<!-- Will Be Removed -->
+<a href="/customers/all">View All Customers</a>
+<a href="#">Continue Booking</a>

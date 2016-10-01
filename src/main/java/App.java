@@ -118,7 +118,7 @@ public class App {
     // int minAge = Integer.parseInt(request.queryParams("min_age"));
     String phoneNum = request.queryParams("phone_number");
     String email = request.queryParams("email");
-    Customer newCustomer = new Customer("fName", "lName", "phoneNum", null, 15, 2);
+    Customer newCustomer = new Customer(fName, lName, phoneNum, null, 15, 2);
     customers.add(newCustomer); // Add new Customer to list of Customers
 
     model.put("template", "templates/success.vtl");
@@ -162,11 +162,11 @@ public class App {
    }, new VelocityTemplateEngine());
 
 
-   get("/customers", (request, repsonse) -> {
+   get("/customers/all", (request, repsonse) -> {
      Map<String, Object> model = new HashMap<String, Object>();
      // Get the task created from the session and show it on the homepage
      model.put("customers", request.session().attribute("customers"));
-     model.put("template", "templates/success.vtl");
+     model.put("template", "templates/customer-list.vtl");
      return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());
 
