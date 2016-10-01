@@ -1,0 +1,13 @@
+<h1>Success!</h1>
+#if ($customers)
+  <ul>
+    #foreach ($customer in $customers)
+      <li>$customer.getfName()</li>
+    #end
+  </ul>
+#else
+  <p>No customers!</p>
+#end
+
+Your customer has been saved.
+<a href="/">Go Back</a>
