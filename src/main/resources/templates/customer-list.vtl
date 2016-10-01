@@ -14,9 +14,9 @@
     #foreach ($customer in $customers)
     <tr class="pg-customer-table__row-header">
       <td>$customer.getfName() $customer.getlName()</td>
-      <td>$customer.geteMail()</td>
+      <td>$customer.getEmail()</td>
       <td class="customer-list-signed-up pg-customer-table__rows--center-aligned">$customer.getNumOfPeople()</td>
-      <td>$customer.getTelNum</td>
+      <td>$customer.getTelNum()</td>
       <td class="pg-customer-table__rows--center-aligned"> $customer.getReservationDate()</td>
     </tr>
     #end

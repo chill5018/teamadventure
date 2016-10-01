@@ -9,7 +9,7 @@ public class Customer {
     private String lName;
     private String telNum;
     private String reservationDate;
-    private String eMail;
+    private String email;
     private int age;
     private int numOfPeople;
 
@@ -17,21 +17,22 @@ public class Customer {
 
     }
 
-    public Customer(String fName, String lName, String telNum, String reservationDate, int age, int numOfPeople) {
+    public Customer(String fName, String lName, String telNum, String email, String reservationDate, int age, int numOfPeople) {
         this.fName = fName;
         this.lName = lName;
         this.telNum = telNum;
+        this.email = email;
         this.age = age;
         this.numOfPeople = numOfPeople;
         this.reservationDate = reservationDate;
     }
 
-    public String geteMail() {
-        return eMail;
+    public String getEmail() {
+        return email;
     }
 
-    public void seteMail(String eMail) {
-        this.eMail = eMail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getAge() {

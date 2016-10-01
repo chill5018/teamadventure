@@ -116,9 +116,9 @@ public class App {
     String lName = request.queryParams("last_name");
     // int numOfPeople = Integer.parseInt(request.queryParams("family_size"));
     // int minAge = Integer.parseInt(request.queryParams("min_age"));
-    String phoneNum = request.queryParams("phone_number");
-    String email = request.queryParams("email");
-    Customer newCustomer = new Customer(fName, lName, phoneNum, null, 15, 2);
+    String phoneNum = request.queryParams("phone_number-indiv");
+    String email = request.queryParams("email-indiv");
+    Customer newCustomer = new Customer(fName, lName, phoneNum, email, null, 15, 2);
     customers.add(newCustomer); // Add new Customer to list of Customers
 
     model.put("template", "templates/success.vtl");
