@@ -6,7 +6,7 @@ import java.util.Date;
  */
 public class Company extends Customer {
     private String compName;
-    private int numPeople;
+    private int numPeople=1;
     private static ArrayList<Customer> instances = new ArrayList<>();
     private int id;
 

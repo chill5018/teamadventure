@@ -11,7 +11,6 @@ public class Customer {
     private String reservationDate;
     private String eMail;
     private int age;
-    private int numOfPeople;
 
     public Customer() {
 
@@ -75,8 +74,5 @@ public class Customer {
         this.reservationDate = reservationDate;
     }
 
-    public int getNumPeople() {
-      return numPeople;
-    }
 
 }
