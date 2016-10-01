@@ -125,6 +125,42 @@ public class App {
     return new ModelAndView(model, layout);
   }, new VelocityTemplateEngine());
 
+  post("/companies", (request, response) -> {
+    Map<String, Object> model = new HashMap<String, Object>();
+
+    /*
+    If request.session().attribute("companies"); returned null, then our variable
+    companies will be referencing null. So we can use if (companies == null) to create
+    and save companies into the session. We create a new empty ArrayList of Customers
+    with the line companies = new ArrayList<Task>();. Then, we save that new
+    ArrayList of Customers into the session with
+    request.session().attribute("companies", companies);.
+    */
+
+    ArrayList<Company> companies = request.session().attribute("companies");
+    if (companies == null) {
+      companies = new ArrayList<Company>();
+      request.session().attribute("companies", companies);
+    }
+
+    /*
+    Next, we create our Task object as we were already doing before,
+    sand then we add it into companies with: companies.add(newTask);
+    */
+    String compName = request.queryParams("company_name");
+    String fName = request.queryParams("first_name");
+    String lName = request.queryParams("last_name");
+    //int numOfPeople = Integer.parseInt(request.queryParams("company_size"));
+    // int minAge = Integer.parseInt(request.queryParams("min_age"));
+    String phoneNum = request.queryParams("phone_number");
+    String email = request.queryParams("email");
+    Company newCompany = new Company(compName,fName, lName, phoneNum, email, null, 15, 2);
+    companies.add(newCompany); // Add new Company to list of Companies
+
+    model.put("template", "templates/company-success.vtl");
+    return new ModelAndView(model, layout);
+  }, new VelocityTemplateEngine());
+
   // Show the Create new Activity Form
    get("/activities/new", (request, response) -> {
     HashMap<String, Object> model = new HashMap<String, Object>();
@@ -167,6 +203,14 @@ public class App {
      // Get the task created from the session and show it on the homepage
      model.put("customers", request.session().attribute("customers"));
      model.put("template", "templates/customer-list.vtl");
+     return new ModelAndView(model, layout);
+   }, new VelocityTemplateEngine());
+
+   get("/companies/all", (request, repsonse) -> {
+     Map<String, Object> model = new HashMap<String, Object>();
+     // Get the task created from the session and show it on the homepage
+     model.put("companies", request.session().attribute("companies"));
+     model.put("template", "templates/company-list.vtl");
      return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());
 
