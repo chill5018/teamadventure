@@ -1,7 +1,7 @@
 import java.util.Map;
 import java.util.HashMap;
 import spark.ModelAndView;
-import spark.template.velocity.VelocityTemplateEngine;
+import template.VelocityTemplateEngine;
 import static spark.Spark.*;
 import java.util.ArrayList;
 
@@ -26,7 +26,7 @@ public class App {
     // Show All Activities "with the create button"
     get("/activities", (request, response) -> {
      HashMap<String, Object> model = new HashMap<String, Object>();
-     model.put("template", "templates/activites.vtl");
+     model.put("template", "templates/activities.vtl");
      return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());
 
