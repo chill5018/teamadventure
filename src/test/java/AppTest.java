@@ -39,6 +39,15 @@ public class AppTest extends FluentTest {
     assertThat(pageSource()).contains("John");
   }
   //
+  @Test
+  public void companyIsCreatedTest() {
+    goTo("http://localhost:4567/bookings/new/create-company");
+    fill("#company_name").with("Nike");
+    submit(".btn-blue");
+    click("a", withText("View All Companies"));
+    assertThat(pageSource()).contains("Nike");
+  }
+  //
   // // Test to see if our newly created task
   // // is visible on the home page
   // @Test
