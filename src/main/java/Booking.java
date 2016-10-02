@@ -1,7 +1,5 @@
-<<<<<<< 385fb2d125ad54c53dd4cf1b4f1c98b5b97adb0b
 import java.util.ArrayList;
 import java.util.Date;
-=======
 import java.util.*;
 
 public class Booking {
