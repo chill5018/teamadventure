@@ -7,31 +7,32 @@ import java.util.Date;
 public class Customer {
     private String fName;
     private String lName;
-    private int telNum;
+    private String telNum;
     private String reservationDate;
-    private String eMail;
+    private String email;
     private int age;
+    private int numOfPeople;
 
     public Customer() {
 
     }
 
-    public Customer(String fName, String lName, int telNum, String reservationDate, int age) {
+    public Customer(String fName, String lName, String telNum, String email, String reservationDate, int age, int numOfPeople) {
         this.fName = fName;
         this.lName = lName;
         this.telNum = telNum;
+        this.email = email;
         this.age = age;
+        this.numOfPeople = numOfPeople;
         this.reservationDate = reservationDate;
-
-
     }
 
-    public String geteMail() {
-        return eMail;
+    public String getEmail() {
+        return email;
     }
 
-    public void seteMail(String eMail) {
-        this.eMail = eMail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getAge() {
@@ -58,11 +59,11 @@ public class Customer {
         this.lName = lName;
     }
 
-    public int getTelNum() {
+    public String getTelNum() {
         return telNum;
     }
 
-    public void setTelNum(int telNum) {
+    public void setTelNum(String telNum) {
         this.telNum = telNum;
     }
 
@@ -74,5 +75,8 @@ public class Customer {
         this.reservationDate = reservationDate;
     }
 
+    public int getNumOfPeople() {
+      return numOfPeople;
+    }
 
 }
