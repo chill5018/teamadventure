@@ -215,8 +215,4 @@ public class App {
    }, new VelocityTemplateEngine());
 
   }
-
-  public static void bookingsToLoad() {
-
-  }
 }

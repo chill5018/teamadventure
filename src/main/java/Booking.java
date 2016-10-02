@@ -32,6 +32,7 @@ public class Booking {
 
   public double getTotalPriceCompany() {
     return selectedActivity.getPrice() * company.getNumOfPeople();
+  }
 
 
   public static List<Booking> all() {
