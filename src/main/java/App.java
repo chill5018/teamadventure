@@ -19,6 +19,17 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+      // -----------------------------------//
+      //         Activity Overview          //
+      //------------------------------------//
+
+      get("/activityoverview", (request, response) -> {
+          HashMap model = new HashMap();
+          model.put("template", "templates/activityoverview.vtl");
+          return new ModelAndView(model, layout);
+      }, new VelocityTemplateEngine());
+
+
     // -----------------------------------//
     //             Activity               //
     //------------------------------------//
