@@ -214,5 +214,14 @@ public class App {
      return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());
 
+   get("/bookings/new/confirm", (request, response) -> {
+       Map<String, Object> model = new HashMap<String, Object>();
+       // I want to get the info the user puts into the booking and redisplay it for a
+       // confirmation screen, problem is there is no page to complete the booking
+       model.put("companies", request.session().attribute("companies"));
+       model.put("template", "templates/booking-confirmation.vtl");
+       return new ModelAndView(model, layout);
+   }, new VelocityTemplateEngine());
+
   }
 }
