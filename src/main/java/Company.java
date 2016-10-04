@@ -6,13 +6,15 @@ import java.util.*;
  */
 public class Company extends Customer {
     private String compName;
+
     private int numPeople;
     private static ArrayList<Company> instances = new ArrayList<>();
     private int id;
 
-    public Company(String fName, String lName, int telNum, String reservationDate, int age)
+    public Company(String compName, String fName, String lName, String telNum, String email, String reservationDate, int age, int numOfPeople)
     {
-        super(fName, lName, telNum, reservationDate, age);
+        super(fName, lName, telNum, email, reservationDate, age, numOfPeople);
+        this.compName = compName;
         this.id = instances.size();
 
     }

@@ -9,6 +9,7 @@ import static org.fluentlenium.core.filter.FilterConstructor.*;
 
 // This will be the home for running the more complex
 // tests, making sure the UI works the way it should
+
 public class AppTest extends FluentTest {
   public WebDriver webDriver = new HtmlUnitDriver();
 
@@ -29,13 +30,23 @@ public class AppTest extends FluentTest {
 
   // Check to see if the form is proccessed
   // and is showing the success page [WIP]
-  // @Test
-  // public void customerIsCreatedTest() {
-  //   goTo("http://localhost:4567/bookings/new/create-family");
-  //   fill("#first_name").with("Colin");
-  //   submit(".btn-blue");
-  //   assertThat(pageSource()).contains("Customer");
-  // }
+  @Test
+  public void customerIsCreatedTest() {
+    goTo("http://localhost:4567/bookings/new/create-family");
+    fill("#first_name").with("John");
+    submit(".btn-blue");
+    click("a", withText("View All Customers"));
+    assertThat(pageSource()).contains("John");
+  }
+  //
+  @Test
+  public void companyIsCreatedTest() {
+    goTo("http://localhost:4567/bookings/new/create-company");
+    fill("#company_name").with("Nike");
+    submit(".btn-blue");
+    click("a", withText("View All Companies"));
+    assertThat(pageSource()).contains("Nike");
+  }
   //
   // // Test to see if our newly created task
   // // is visible on the home page
