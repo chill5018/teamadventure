@@ -48,6 +48,31 @@ public class AppTest extends FluentTest {
     assertThat(pageSource()).contains("Nike");
   }
   //
+  //Activity tests
+  @Test
+  public  void activityKartTest(){
+
+    goTo("http://localhost:4567/activities");
+    assertThat(pageSource()).contains("Kart-Go");
+  }
+
+  @Test
+  public  void activitySumoTest(){
+    goTo("http://localhost:4567/activities");
+    assertThat(pageSource()).contains("Sumo");
+  }
+
+  @Test
+  public  void activityPaintballTest(){
+    goTo("http://localhost:4567/activities");
+    assertThat(pageSource()).contains("Paintball");
+  }
+
+  @Test
+  public  void activityMinigolfTest(){
+    goTo("http://localhost:4567/activities");
+    assertThat(pageSource()).contains("Mini Golf");
+  }
   // // Test to see if our newly created task
   // // is visible on the home page
   // @Test

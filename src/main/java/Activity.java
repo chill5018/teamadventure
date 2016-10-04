@@ -12,7 +12,7 @@ public class Activity {
     private int minAge;
     private double price;
     private int time;
-
+    private String imgSrc;
     private static ArrayList<Activity> instances = new ArrayList<Activity>();
     private int id;
 
@@ -75,7 +75,15 @@ public class Activity {
      return id;
     }
 
-    public Activity(String name, String place, double price, int time, int capacity, int minAge){
+    public String getImgSrc() {
+        return imgSrc;
+    }
+
+    public void setImgSrc(String imgSrc) {
+        this.imgSrc = imgSrc;
+    }
+
+    public Activity(String name, String place, double price, int time, int capacity, int minAge, String imgSrc){
         this.name = name;
         this.place = place;
         this.price = price;
@@ -83,5 +91,6 @@ public class Activity {
         this.capacity = capacity;
         this.minAge = minAge;
         this.id = instances.size();
+        this.imgSrc = imgSrc;
     }
 }

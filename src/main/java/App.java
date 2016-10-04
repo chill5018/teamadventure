@@ -1,3 +1,4 @@
+import java.util.HashSet;
 import java.util.Map;
 import java.util.HashMap;
 import spark.ModelAndView;
@@ -25,7 +26,19 @@ public class App {
 
     // Show All Activities "with the create button"
     get("/activities", (request, response) -> {
+        boolean activityDemo=true;
      HashMap<String, Object> model = new HashMap<String, Object>();
+     HashSet<Activity> activities = request.session().attribute("activities");
+        if (activities == null) {
+            activities = new HashSet<Activity>();
+            request.session().attribute("activities", activities);
+            activities.add(new Activity("Kart-Go","Copenhagen",370, 21, 6, 12,"/Images/kart-go.jpg"));
+            activities.add(new Activity("Mini Golf","Copenhagen",210, 18, 20, 6,"/Images/minigolf.jpg"));
+            activities.add(new Activity("Paintball","Copenhagen",200, 5, 20, 23, "/Images/paintball.jpg"));
+            activities.add(new Activity("Sumo","Copenhagen",180, 6, 06, 18, "/Images/sumo.png"));
+        }
+
+     model.put("activities", request.session().attribute("activities"));
      model.put("template", "templates/activities.vtl");
      return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());
@@ -33,21 +46,21 @@ public class App {
    // Show Selected Activity
    get("/activities/:id", (request, response) -> {
     HashMap<String, Object> model = new HashMap<String, Object>();
-    model.put("template", "templates/activites.vtl");
+    model.put("template", "templates/activities.vtl");
     return new ModelAndView(model, layout);
   }, new VelocityTemplateEngine());
 
    // Edit Selected Activity
    get("/activities/:id/edit", (request, response) -> {
     HashMap<String, Object> model = new HashMap<String, Object>();
-    model.put("template", "templates/activites.vtl");
+    model.put("template", "templates/activities.vtl");
     return new ModelAndView(model, layout);
   }, new VelocityTemplateEngine());
 
    // "Save / Update" Selected Activity
    post("/activities/:id/edit", (request, response) -> {
     HashMap<String, Object> model = new HashMap<String, Object>();
-    model.put("template", "templates/activites.vtl");
+    model.put("template", "templates/activities.vtl");
     return new ModelAndView(model, layout);
   }, new VelocityTemplateEngine());
 
@@ -59,14 +72,14 @@ public class App {
    // Activity Selector for Booking
     get("/bookings/new/choose-activity", (request, response) -> {
      HashMap<String, Object> model = new HashMap<String, Object>();
-     model.put("template", "templates/activites.vtl");
+     model.put("template", "templates/activities.vtl");
      return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());
 
    // Show the Create new Activity Form
-    get("/activities/new", (request, response) -> {
+    get("/activity-new", (request, response) -> {
      HashMap<String, Object> model = new HashMap<String, Object>();
-     model.put("template", "templates/activites-new.vtl");
+     model.put("template", "templates/activity-new.vtl");
      return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());
 
@@ -161,12 +174,26 @@ public class App {
     return new ModelAndView(model, layout);
   }, new VelocityTemplateEngine());
 
-  // Show the Create new Activity Form
-   get("/activities/new", (request, response) -> {
-    HashMap<String, Object> model = new HashMap<String, Object>();
-    model.put("template", "templates/activites-new.vtl");
-    return new ModelAndView(model, layout);
-  }, new VelocityTemplateEngine());
+      post("/activity", (request, response) -> {
+          HashMap<String, Object> model = new HashMap<String, Object>();
+          ArrayList<Activity> activities = request.session().attribute("activities");
+          if (activities == null) {
+              activities = new ArrayList<>();
+              request.session().attribute("activity", activities);
+          }
+
+          String name = request.queryParams("name");
+          String place = request.queryParams("place");
+          Double price = Double.parseDouble(request.params("price"));
+          int time = Integer.parseInt(request.queryParams("time"));
+          int capacity = Integer.parseInt(request.queryParams("capacity"));
+          int minAge = Integer.parseInt(request.queryParams("min-age"));
+          String imgSrc = request.queryParams("imgSrc");
+          activities.add(new Activity(name,place,price,time,capacity,minAge,imgSrc));
+          model.put("template", "templates/success-activity.vtl");
+
+          return new ModelAndView(model, layout);
+      }, new VelocityTemplateEngine());
 
   // View All Bookings
   get("/bookings", (request, response) -> {
