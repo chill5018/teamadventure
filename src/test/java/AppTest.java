@@ -25,7 +25,7 @@ public class AppTest extends FluentTest {
   @Test
   public void rootTest() {
     goTo("http://localhost:4567/");
-    assertThat(pageSource()).contains("Adventure Zone");
+    assertThat(pageSource()).contains("Adventure Alley");
   }
 
   // Check to see if the form is proccessed
@@ -35,16 +35,16 @@ public class AppTest extends FluentTest {
     goTo("http://localhost:4567/bookings/new/create-family");
     fill("#first_name").with("John");
     submit(".btn-blue");
-    click("a", withText("View All Customers"));
+    goTo("http://localhost:4567/customers/all");
     assertThat(pageSource()).contains("John");
   }
-  //
+
   @Test
   public void companyIsCreatedTest() {
     goTo("http://localhost:4567/bookings/new/create-company");
     fill("#company_name").with("Nike");
     submit(".btn-blue");
-    click("a", withText("View All Companies"));
+    goTo("http://localhost:4567/companies/all");
     assertThat(pageSource()).contains("Nike");
   }
   //
