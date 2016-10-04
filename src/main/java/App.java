@@ -121,7 +121,7 @@ public class App {
    }, new VelocityTemplateEngine());
 
    // Show the Create new Activity Form
-    get("/activity-new", (request, response) -> {
+    get("/activities/new", (request, response) -> {
      HashMap<String, Object> model = new HashMap<String, Object>();
      model.put("template", "templates/activity-new.vtl");
      return new ModelAndView(model, layout);
