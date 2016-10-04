@@ -218,8 +218,19 @@ public class App {
        Map<String, Object> model = new HashMap<String, Object>();
        // I want to get the info the user puts into the booking and redisplay it for a
        // confirmation screen, problem is there is no page to complete the booking
-       model.put("companies", request.session().attribute("companies"));
+       model.put("new-booking", request.session().attribute("new-booking"));
        model.put("template", "templates/booking-confirmation.vtl");
+       return new ModelAndView(model, layout);
+   }, new VelocityTemplateEngine());
+
+   post("/bookings/new/details", (request, response) -> {
+       HashMap<String, Object> model = new HashMap<String, Object>();
+       ArrayList<Activity> activities = request.session().attribute("activities");
+       if (activities == null) {
+           activities = new ArrayList<Activity>();
+           request.session().attribute("activities", activities);
+       }
+       model.put("template", "templates/booking-details.vtl");
        return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());
 
