@@ -48,7 +48,7 @@ public class App {
       }
 
       String time = request.queryParams("timetex  tbox");
-      Activity newActivity = new Activity("", "", 10 , 10, 10, 10 );
+      Activity newActivity = new Activity("", 10 , 10, 10, 10, "url");
       activities.add(newActivity);
 
       model.put("template", "templates/activitysave.vtl");
@@ -75,10 +75,10 @@ public class App {
         if (activities == null) {
             activities = new HashSet<Activity>();
             request.session().attribute("activities", activities);
-            activities.add(new Activity("Kart-Go","Copenhagen",370, 21, 6, 12,"/Images/kart-go.jpg"));
-            activities.add(new Activity("Mini Golf","Copenhagen",210, 18, 20, 6,"/Images/minigolf.jpg"));
-            activities.add(new Activity("Paintball","Copenhagen",200, 5, 20, 23, "/Images/paintball.jpg"));
-            activities.add(new Activity("Sumo","Copenhagen",180, 6, 06, 18, "/Images/sumo.png"));
+            activities.add(new Activity("Kart-Go",370, 21, 6, 12,"/images/kart-go.jpg"));
+            activities.add(new Activity("Mini Golf",210, 18, 20, 6,"/images/minigolf.jpg"));
+            activities.add(new Activity("Paintball",200, 5, 20, 23, "/images/paintball.jpg"));
+            activities.add(new Activity("Sumo",180, 6, 06, 18, "/images/sumo.png"));
         }
 
      model.put("activities", request.session().attribute("activities"));
@@ -141,12 +141,6 @@ public class App {
   //     return new ModelAndView(model, layout);
   //   }, new VelocityTemplateEngine());
 
-
-   get("/bookings/new/create-family", (request, response) -> {
-    HashMap<String, Object> model = new HashMap<String, Object>();
-    model.put("template", "templates/individuals.vtl");
-    return new ModelAndView(model, layout);
-  }, new VelocityTemplateEngine());
 
   post("/customers", (request, response) -> {
     Map<String, Object> model = new HashMap<String, Object>();
@@ -228,13 +222,12 @@ public class App {
           }
 
           String name = request.queryParams("name");
-          String place = request.queryParams("place");
           Double price = Double.parseDouble(request.params("price"));
           int time = Integer.parseInt(request.queryParams("time"));
           int capacity = Integer.parseInt(request.queryParams("capacity"));
           int minAge = Integer.parseInt(request.queryParams("min-age"));
           String imgSrc = request.queryParams("imgSrc");
-          activities.add(new Activity(name,place,price,time,capacity,minAge,imgSrc));
+          activities.add(new Activity(name,price,time,capacity,minAge,imgSrc));
           model.put("template", "templates/success-activity.vtl");
 
           return new ModelAndView(model, layout);

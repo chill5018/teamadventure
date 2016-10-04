@@ -40,10 +40,10 @@ public class Demo {
     companies.add(comp4);
 
 
-    Activity paintball = new Activity("Paintball", "Cph", 500, 1500, 15, 12,"images/kart-g.jpg");
-    Activity sumo = new Activity("Sumo", "Cph", 200, 1500, 15, 12, "images/minigolf.jpg");
-    Activity miniGolf = new Activity("MiniGolf", "Cph", 200, 1500, 15, 2, "images/paintball.jpg");
-    Activity goKarts = new Activity("Go-Kart", "Cph", 200, 1500, 15, 12, "images/sumo.png");
+    Activity paintball = new Activity("Paintball", 500, 1500, 15, 12,"images/kart-g.jpg");
+    Activity sumo = new Activity("Sumo", 200, 1500, 15, 12, "images/minigolf.jpg");
+    Activity miniGolf = new Activity("MiniGolf", 200, 1500, 15, 2, "images/paintball.jpg");
+    Activity goKarts = new Activity("Go-Kart", 200, 1500, 15, 12, "images/sumo.png");
 
     activities.add(paintball);
     activities.add(sumo);
