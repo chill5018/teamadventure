@@ -86,26 +86,27 @@ public class App {
      return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-   // Show Selected Activity
-   get("/activities/:id", (request, response) -> {
-    HashMap<String, Object> model = new HashMap<String, Object>();
-    model.put("template", "templates/activities.vtl");
-    return new ModelAndView(model, layout);
-  }, new VelocityTemplateEngine());
 
-   // Edit Selected Activity
-   get("/activities/:id/edit", (request, response) -> {
-    HashMap<String, Object> model = new HashMap<String, Object>();
-    model.put("template", "templates/activities.vtl");
-    return new ModelAndView(model, layout);
-  }, new VelocityTemplateEngine());
-
-   // "Save / Update" Selected Activity
-   post("/activities/:id/edit", (request, response) -> {
-    HashMap<String, Object> model = new HashMap<String, Object>();
-    model.put("template", "templates/activities.vtl");
-    return new ModelAndView(model, layout);
-  }, new VelocityTemplateEngine());
+  //  // Show Selected Activity
+  //  get("/activities/:id", (request, response) -> {
+  //    HashMap<String, Object> model = new HashMap<String, Object>();
+  //    model.put("template", "templates/activites.vtl");
+  //    return new ModelAndView(model, layout);
+  //   }, new VelocityTemplateEngine());
+  //
+  //  // Edit Selected Activity
+  //  get("/activities/:id/edit", (request, response) -> {
+  //   HashMap<String, Object> model = new HashMap<String, Object>();
+  //   model.put("template", "templates/activites.vtl");
+  //   return new ModelAndView(model, layout);
+  // }, new VelocityTemplateEngine());
+  //
+  //  // "Save / Update" Selected Activity
+  //  post("/activities/:id/edit", (request, response) -> {
+  //   HashMap<String, Object> model = new HashMap<String, Object>();
+  //   model.put("template", "templates/activites.vtl");
+  //   return new ModelAndView(model, layout);
+  // }, new VelocityTemplateEngine());
 
 
   // -----------------------------------//
@@ -133,12 +134,12 @@ public class App {
     return new ModelAndView(model, layout);
   }, new VelocityTemplateEngine());
 
-  // View Booking with ID
-  get("/bookings/:id", (request, response) -> {
-      HashMap<String, Object> model = new HashMap<String, Object>();
-      model.put("template", "templates/bookings.vtl");
-      return new ModelAndView(model, layout);
-    }, new VelocityTemplateEngine());
+  // // View Booking with ID
+  // get("/bookings/:id", (request, response) -> {
+  //     HashMap<String, Object> model = new HashMap<String, Object>();
+  //     model.put("template", "templates/bookings.vtl");
+  //     return new ModelAndView(model, layout);
+  //   }, new VelocityTemplateEngine());
 
 
    get("/bookings/new/create-family", (request, response) -> {
@@ -246,14 +247,6 @@ public class App {
     return new ModelAndView(model, layout);
   }, new VelocityTemplateEngine());
 
-
-  // View All Bookings (Existing Bookings)
-  get("/bookings", (request, response) -> {
-   HashMap<String, Object> model = new HashMap<String, Object>();
-   model.put("template", "templates/bookings.vtl");
-   return new ModelAndView(model, layout);
- }, new VelocityTemplateEngine());
-
    // Booking Flow Step 2:
    get("/bookings/new/select-activity", (request, response) -> {
      HashMap<String, Object> model = new HashMap<String, Object>();
@@ -284,15 +277,9 @@ public class App {
    return new ModelAndView(model, layout);
  }, new VelocityTemplateEngine());
 
-  // Create a Person
-  get("/bookings/new/create-family", (request, response) -> {
-   HashMap<String, Object> model = new HashMap<String, Object>();
-   model.put("template", "templates/customers-create-individual.vtl");
-   return new ModelAndView(model, layout);
- }, new VelocityTemplateEngine());
 
  // Save a customer entered in the form.
- post("/customers", (request, response) -> {
+ post("/bookings/new/customers/add/individual", (request, response) -> {
    Map<String, Object> model = new HashMap<String, Object>();
 
    /*
@@ -323,12 +310,12 @@ public class App {
    Customer newCustomer = new Customer(fName, lName, phoneNum, email, null, 15, 2);
    customers.add(newCustomer); // Add new Customer to list of Customers
 
-   model.put("template", "templates/booking-overview.vtl");
+   model.put("template", "templates/customer-success.vtl");
    return new ModelAndView(model, layout);
  }, new VelocityTemplateEngine());
 
  // Save a company entered in the form
- post("/bookings/new/customers/add", (request, response) -> {
+ post("/bookings/new/customers/add/company", (request, response) -> {
    Map<String, Object> model = new HashMap<String, Object>();
 
    /*
@@ -360,7 +347,7 @@ public class App {
    Company newCompany = new Company(compName,fName, lName, phoneNum, email, null, 15, 2);
    companies.add(newCompany); // Add new Company to list of Companies
 
-   model.put("template", "templates/booking-overview.vtl");
+   model.put("template", "templates/company-success.vtl");
    return new ModelAndView(model, layout);
  }, new VelocityTemplateEngine());
 
@@ -383,12 +370,23 @@ public class App {
      return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());
 
-   // View All Customers
+   // View All Companies
    get("/companies/all", (request, repsonse) -> {
      Map<String, Object> model = new HashMap<String, Object>();
      // Get the task created from the session and show it on the homepage
      model.put("companies", request.session().attribute("companies"));
      model.put("template", "templates/company-list.vtl");
+     return new ModelAndView(model, layout);
+   }, new VelocityTemplateEngine());
+
+   // Bookings Overview
+   get("/bookings/new/overview", (request, repsonse) -> {
+     Map<String, Object> model = new HashMap<String, Object>();
+     // Get the task created from the session and show it on the homepage
+     model.put("customers", request.session().attribute("customers"));
+     model.put("companies", request.session().attribute("companies"));
+     model.put("activities", request.session().attribute("activities"));
+     model.put("template", "templates/booking-overview.vtl");
      return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());
 
