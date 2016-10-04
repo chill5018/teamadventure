@@ -11,7 +11,7 @@ public class Customer {
     private String reservationDate;
     private String eMail;
     private int age;
-    private int numOfPeople;
+    private int numPeople;
 
     private static ArrayList<Customer> instances = new ArrayList<Customer>();
     private int id;

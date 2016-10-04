@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.ArrayList;
 
 public class Booking {
   private Activity selectedActivity;
@@ -24,21 +24,8 @@ public class Booking {
     return customer;
   }
 
-
-  public static List<Booking> all() {
-    return instances;
-  }
-
-  public static void clear() {
-    instances.clear();
-  }
-
-  public int getId() {
-   return id;
-  }
-
   public double getTotalPrice() {
-    return selectedActivity.getPrice() * customer.getNumOfPeople();
+    return selectedActivity.getPrice() * customer.getNumPeople();
   }
 
 }
