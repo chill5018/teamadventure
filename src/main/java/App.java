@@ -30,6 +30,32 @@ public class App {
           return new ModelAndView(model, layout);
       }, new VelocityTemplateEngine());
 
+    post("/activityoverview",(request,response) -> {
+          HashMap<String, Object> model = new HashMap<String, Object>();
+
+    ArrayList<Activity> activities = request.session().attribute("activityoverview");
+
+      if ( activities == null)
+      {
+        activities = new ArrayList<Activity>();
+        request.session().attribute("activityoverview", activities);
+      }
+
+    String time = request.queryParams("timetex  tbox");
+    Activity newActivity = new Activity("", "", 10 , 10, 10, 10 );
+    activities.add(newActivity);
+
+    model.put("template", "templates/activitysave.vtl");
+    return new ModelAndView(model,layout);
+  },new VelocityTemplateEngine());
+
+  get("/activitysave", (request, response) -> {
+      HashMap model = new HashMap();
+      model.put("template", "templates/activitysave.vtl");
+      return new ModelAndView(model, layout);
+  }, new VelocityTemplateEngine());
+
+
 
     // -----------------------------------//
     //             Activity               //
