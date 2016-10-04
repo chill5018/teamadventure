@@ -32,10 +32,10 @@ public class App {
         if (activities == null) {
             activities = new HashSet<Activity>();
             request.session().attribute("activities", activities);
-            activities.add(new Activity("Kart-Go","Copenhagen",370, 21, 6, 12,"/images/kart-go.jpg"));
-            activities.add(new Activity("Mini Golf","Copenhagen",210, 18, 20, 6,"/images/minigolf.jpg"));
-            activities.add(new Activity("Paintball","Copenhagen",200, 5, 20, 23, "/images/paintball.jpg"));
-            activities.add(new Activity("Sumo","Copenhagen",180, 6, 06, 18, "/images/sumo.png"));
+            activities.add(new Activity("Kart-Go","Copenhagen",370, 21, 6, 12,"/Images/kart-go.jpg"));
+            activities.add(new Activity("Mini Golf","Copenhagen",210, 18, 20, 6,"/Images/minigolf.jpg"));
+            activities.add(new Activity("Paintball","Copenhagen",200, 5, 20, 23, "/Images/paintball.jpg"));
+            activities.add(new Activity("Sumo","Copenhagen",180, 6, 06, 18, "/Images/sumo.png"));
         }
 
      model.put("activities", request.session().attribute("activities"));
