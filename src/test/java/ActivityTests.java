@@ -8,7 +8,7 @@ public class ActivityTests {
 
     @Test
     public void Activity_isCreatedCorrectly(){
-        Activity testActivity = new Activity("Paintball", "Cph", 500, 1500, 15, 14);
+        Activity testActivity = new Activity("Paintball", "Cph", 500, 1500, 15, 14,"images/paintball.jpg");
         assertEquals("Paintball", testActivity.getName());
         assertEquals("Cph", testActivity.getPlace());
         //assertEquals(500, testActivity.getPrice());

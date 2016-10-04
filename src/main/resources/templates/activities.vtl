@@ -1,40 +1,27 @@
 
 <div class="main-header-container">
-  <p class="main-header-subtitle">Actities</p>
+  <p class="main-header-subtitle">Activities</p>
 </div>
 
 
 <div class="main-wrapper">
+    #if($activities)
+     #foreach ($activity in $activities)
+      <div class="col-md-6 activity-button">
+                  <div class="vbox">
+                   <img src=$activity.getImgSrc() alt=$activity.getName() />
+                   <button type=$activity.getName() class="btn btn-blue">$activity.getName()</button>
+                  </div>
+      </div>
+     #end
+    #else
+        <p>No activities!</p>
+    #end
+    <div class="col-xs-12 activity-button">
 
-        <div class="col-md-6 activity-button">
-            <div class="vbox">
-            <img src='/images/kart-go.jpg' alt='Kart-Go photo.' />
-            <button type="Kart-Go" class="btn btn-blue" action="/activities/">Kart-Go</button>
-            </div>
-        </div>
+        <form class="new activity" action="/activity-new" method="get">
+                <button type="Add Activity" class="btn btn-blue" >Add activity</button>
+        </form>
+    </div>
 
-        <div class="col-md-6 activity-button">
-            <div class="vbox">
-             <img src='/images/minigolf.jpg' alt='Mini Golf photo.' />
-             <button type="Mini Golf" class="btn btn-blue">Mini Golf</button>
-             </div>
-        </div>
-
-        <div class="col-md-6 activity-button">
-            <div class="vbox">
-              <img src='/images/paintball.jpg' alt='Paintball photo.'/>
-              <button  type="Paint Ball" class="btn btn-blue">Paint Ball</button>
-            </div>
-        </div>
-
-        <div class="col-md-6 activity-button">
-          <div class="vbox">
-                <img src='/images/sumo.png' alt='Sumo photo.' />
-                <button type="Sumo" class="btn btn-blue">Sumo</button>
-          </div>
-        </div>
-
-        <div class="col-xs-12 activity-button">
-            <button type="Add Activity" class="btn btn-blue">Add activity</button>
-        </div>
 </div>
