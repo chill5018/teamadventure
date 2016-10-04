@@ -1,5 +1,9 @@
-<p class="main-header-subtitle">Family Booking</p>
-<form action='/customers' method='post'>
+<p class="main-header-subtitle">Customer</p>
+<form action='/bookings/new/customers/add' method='post'>
+  <div class="form-group" style="display: none;">
+    <label for="first_name">First Name</label>
+    <input id="first_name" name="first_name" class="form-control" type="text">
+  </div>
   <div class="form-group">
     <label for="first_name">First Name</label>
     <input id="first_name" name="first_name" class="form-control" type="text">
@@ -25,5 +29,5 @@
     <input id="email-indiv" name="email-indiv" class="form-control" type="email">
   </div>
   <a href="/bookings/new/choose-customer-type" class="btn btn-grey">Go Back</a>
-  <a href="/activities" class="btn btn-blue">Continue</a>
+  <button type="submit" class="btn btn-blue">Continue</button>
 </form>

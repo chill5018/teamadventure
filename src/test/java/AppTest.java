@@ -25,7 +25,7 @@ public class AppTest extends FluentTest {
   @Test
   public void rootTest() {
     goTo("http://localhost:4567/");
-    assertThat(pageSource()).contains("Adventure Zone");
+    assertThat(pageSource()).contains("Adventure ");
   }
 
   // Check to see if the form is proccessed

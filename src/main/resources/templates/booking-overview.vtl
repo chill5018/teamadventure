@@ -1,0 +1,61 @@
+#if ($customers)
+<h1>Customers</h1>
+<table class="pg-table pg-customer-table">
+  <thead class="pg-table-head">
+    <tr class="pg-customer-table__header">
+      <th class="col-md-3">Name</th>
+      <th class="col-md-4">Email</th>
+      <th class="pg-customer-table__rows--center-aligned col-md-2">Party Size</th>
+      <th class="pg-customer-table__rows--center-aligned col-md-2">Phone</th>
+      <th class="pg-customer-table__rows--right-aligned col-md-1">Date</th>
+    </tr>
+  </thead>
+  <tbody class="pg-table-body pg-customer-table__rows" data-bind="foreach: teachers">
+    #foreach ($customer in $customers)
+    <tr class="pg-customer-table__row-header">
+      <td>$customer.getfName() $customer.getlName()</td>
+      <td>$customer.getEmail()</td>
+      <td class="customer-list-signed-up pg-customer-table__rows--center-aligned">$customer.getNumOfPeople()</td>
+      <td>$customer.getTelNum()</td>
+      <td class="pg-customer-table__rows--center-aligned"> $customer.getReservationDate()</td>
+    </tr>
+    #end
+  </tbody>
+</table>
+
+
+#else
+  <p>No customers!</p>
+#end
+
+#if ($companies)
+<h1>Companies</h1>
+<table class="pg-table pg-company-table">
+  <thead class="pg-table-head">
+    <tr class="pg-company-table__header">
+      <th class="col-md-2">Copmany Name</th>
+      <th class="col-md-3">Name</th>
+      <th class="col-md-2">Email</th>
+      <th class="pg-company-table__rows--center-aligned col-md-2">Party Size</th>
+      <th class="pg-company-table__rows--center-aligned col-md-2">Phone</th>
+      <th class="pg-company-table__rows--right-aligned col-md-1">Date</th>
+    </tr>
+  </thead>
+  <tbody class="pg-table-body pg-company-table__rows" data-bind="foreach: teachers">
+    #foreach ($company in $companies)
+    <tr class="pg-company-table__row-header">
+      <td>$company.getCompName()</td>
+      <td>$company.getfName() $company.getlName()</td>
+      <td>$company.getEmail()</td>
+      <td class="company-list-signed-up pg-company-table__rows--center-aligned">$company.getNumOfPeople()</td>
+      <td>$company.getTelNum()</td>
+      <td class="pg-company-table__rows--center-aligned"> $company.getReservationDate()</td>
+    </tr>
+    #end
+  </tbody>
+</table>
+
+
+#else
+  <p>No companies!</p>
+#end
