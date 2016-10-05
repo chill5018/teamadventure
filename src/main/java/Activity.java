@@ -5,6 +5,7 @@ import java.util.List;
  * Created by Filip on 29-09-2016.
  */
 
+
 public class Activity {
     private String name;
     private int capacity;
@@ -74,6 +75,12 @@ public class Activity {
         this.imgSrc = imgSrc;
     }
 
+    public Activity(String name, String imgSrc)
+    {
+        this.name = name;
+        this.id = instances.size();
+        this.imgSrc = imgSrc;
+    }
     public Activity(String name, double price, int time, int capacity, int minAge, String imgSrc){
         this.name = name;
         this.price = price;

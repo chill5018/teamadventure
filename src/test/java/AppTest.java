@@ -73,6 +73,23 @@ public class AppTest extends FluentTest {
     goTo("http://localhost:4567/activities");
     assertThat(pageSource()).contains("Mini Golf");
   }
+
+  @Test
+  public void createActivityTest()
+  {
+    goTo("http://localhost:4567/activities");
+    click(".btn", withText("Add activity"));
+    fill("#name").with("Judo");
+    fill("#price").with("20");
+    fill("#time").with("17");
+    fill("#capacity").with("30");
+    fill("#min-age").with("12");
+    fill("#imgSrc").with("/Images/paintball.jpg");
+    submit(".btn-blue");
+    goTo("http://localhost:4567/activities");
+    assertThat(pageSource().contains("Judo"));
+
+  }
   // // Test to see if our newly created task
   // // is visible on the home page
   // @Test

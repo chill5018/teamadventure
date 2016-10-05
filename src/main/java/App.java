@@ -9,13 +9,15 @@ import java.util.ArrayList;
 public class App {
   private static ArrayList<Customer> customers = new ArrayList<>();
   private static ArrayList<Company> companies = new ArrayList<>();
-  private static ArrayList<Activity> activities = new ArrayList<>();
+  private static HashSet<Activity> activities = new HashSet<>();
   private static ArrayList<Booking> bookings = new ArrayList<>();
 
   public static void main(String[] args) {
     // Set path of Layout
     String layout = "templates/layout.vtl";
     staticFileLocation("/public");
+
+
 
     // -----------------------------------//
     //               HOMEPAGE             //
@@ -43,7 +45,7 @@ public class App {
 
       if ( activities == null)
       {
-        activities = new ArrayList<Activity>();
+        activities = new HashSet<Activity>();
         request.session().attribute("activityoverview", activities);
       }
 
@@ -71,14 +73,14 @@ public class App {
     get("/activities", (request, response) -> {
         boolean activityDemo=true;
      HashMap<String, Object> model = new HashMap<String, Object>();
-     HashSet<Activity> activities = request.session().attribute("activities");
+     activities = request.session().attribute("activities");
         if (activities == null) {
             activities = new HashSet<Activity>();
+            activities.add(new Activity("Kart-Go",370, 21, 6, 12,"/Images/kart-go.jpg"));
+            activities.add(new Activity("Mini Golf",210, 18, 20, 6,"/Images/minigolf.jpg"));
+            activities.add(new Activity("Paintball",200, 5, 20, 23, "/Images/paintball.jpg"));
+            activities.add(new Activity("Sumo",180, 6, 06, 18, "/Images/sumo.png"));
             request.session().attribute("activities", activities);
-            activities.add(new Activity("Kart-Go",370, 21, 6, 12,"/images/kart-go.jpg"));
-            activities.add(new Activity("Mini Golf",210, 18, 20, 6,"/images/minigolf.jpg"));
-            activities.add(new Activity("Paintball",200, 5, 20, 23, "/images/paintball.jpg"));
-            activities.add(new Activity("Sumo",180, 6, 06, 18, "/images/sumo.png"));
         }
 
      model.put("activities", request.session().attribute("activities"));
@@ -202,11 +204,13 @@ public class App {
     String compName = request.queryParams("company_name");
     String fName = request.queryParams("first_name");
     String lName = request.queryParams("last_name");
-    //int numOfPeople = Integer.parseInt(request.queryParams("company_size"));
-    // int minAge = Integer.parseInt(request.queryParams("min_age"));
+    String sNumOfPeople = request.queryParams("company_size");
+    String sMinAge = request.queryParams("min_age");
+    int numOfPeople = Integer.parseInt(sNumOfPeople);
+    int minAge = Integer.parseInt(sMinAge);
     String phoneNum = request.queryParams("phone_number");
     String email = request.queryParams("email");
-    Company newCompany = new Company(compName,fName, lName, phoneNum, email, null, 15, 2);
+    Company newCompany = new Company(compName,fName, lName, phoneNum, email, null, minAge, numOfPeople);
     companies.add(newCompany); // Add new Company to list of Companies
 
     model.put("template", "templates/company-success.vtl");
@@ -215,17 +219,22 @@ public class App {
 
       post("/activity", (request, response) -> {
           HashMap<String, Object> model = new HashMap<String, Object>();
-          ArrayList<Activity> activities = request.session().attribute("activities");
+          activities = new HashSet<Activity>();
+          activities = request.session().attribute("activities");
           if (activities == null) {
-              activities = new ArrayList<>();
-              request.session().attribute("activity", activities);
+              request.session().attribute("activities", activities);
           }
 
           String name = request.queryParams("name");
-          Double price = Double.parseDouble(request.params("price"));
-          int time = Integer.parseInt(request.queryParams("time"));
-          int capacity = Integer.parseInt(request.queryParams("capacity"));
-          int minAge = Integer.parseInt(request.queryParams("min-age"));
+          String sPrice = request.queryParams("price");
+          String sTime = request.queryParams("time");
+          String sCapacity = request.queryParams("capacity");
+          String sMinAge = request.queryParams("min-age");
+
+          Double price = Double.parseDouble(sPrice);
+          int time = Integer.parseInt(sTime);
+          int capacity = Integer.parseInt(sCapacity);
+          int minAge = Integer.parseInt(sMinAge);
           String imgSrc = request.queryParams("imgSrc");
           activities.add(new Activity(name,price,time,capacity,minAge,imgSrc));
           model.put("template", "templates/success-activity.vtl");
@@ -233,17 +242,12 @@ public class App {
           return new ModelAndView(model, layout);
       }, new VelocityTemplateEngine());
 
-  // Show the Create new Activity Form
-   get("/activities/new", (request, response) -> {
-    HashMap<String, Object> model = new HashMap<String, Object>();
-    model.put("template", "templates/activites-new.vtl");
-    return new ModelAndView(model, layout);
-  }, new VelocityTemplateEngine());
 
    // Booking Flow Step 2:
    get("/bookings/new/select-activity", (request, response) -> {
      HashMap<String, Object> model = new HashMap<String, Object>();
-    //  model.put("bookings", Booking.all());
+
+       model.put("activities", request.session().attribute("activities"));
      model.put("template", "templates/activities-booking.vtl");
      return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());
