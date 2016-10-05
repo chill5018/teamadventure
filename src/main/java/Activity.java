@@ -67,6 +67,10 @@ public class Activity {
      return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getImgSrc() {
         return imgSrc;
     }
@@ -87,7 +91,6 @@ public class Activity {
         this.time = time;
         this.capacity = capacity;
         this.minAge = minAge;
-        this.id = instances.size();
         this.imgSrc = imgSrc;
     }
 }

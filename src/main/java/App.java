@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class App {
   private static ArrayList<Customer> customers = new ArrayList<>();
   private static ArrayList<Company> companies = new ArrayList<>();
-  private static HashSet<Activity> activities = new HashSet<>();
+  private static ArrayList<Activity> activities = new ArrayList<>();
   private static ArrayList<Booking> bookings = new ArrayList<>();
 
   public static void main(String[] args) {
@@ -45,7 +45,7 @@ public class App {
 
       if ( activities == null)
       {
-        activities = new HashSet<Activity>();
+        activities = new ArrayList<Activity>();
         request.session().attribute("activityoverview", activities);
       }
 
@@ -75,11 +75,15 @@ public class App {
      HashMap<String, Object> model = new HashMap<String, Object>();
      activities = request.session().attribute("activities");
         if (activities == null) {
-            activities = new HashSet<Activity>();
+            activities = new ArrayList<Activity>();
             activities.add(new Activity("Kart-Go",370, 21, 6, 12,"/Images/kart-go.jpg"));
+            activities.get(activities.size()-1).setId(activities.size()-1);
             activities.add(new Activity("Mini Golf",210, 18, 20, 6,"/Images/minigolf.jpg"));
+            activities.get(activities.size()-1).setId(activities.size()-1);
             activities.add(new Activity("Paintball",200, 5, 20, 23, "/Images/paintball.jpg"));
+            activities.get(activities.size()-1).setId(activities.size()-1);
             activities.add(new Activity("Sumo",180, 6, 06, 18, "/Images/sumo.png"));
+            activities.get(activities.size()-1).setId(activities.size()-1);
             request.session().attribute("activities", activities);
         }
 
@@ -219,7 +223,7 @@ public class App {
 
       post("/activity", (request, response) -> {
           HashMap<String, Object> model = new HashMap<String, Object>();
-          activities = new HashSet<Activity>();
+          activities = new ArrayList<Activity>();
           activities = request.session().attribute("activities");
           if (activities == null) {
               request.session().attribute("activities", activities);
@@ -237,6 +241,7 @@ public class App {
           int minAge = Integer.parseInt(sMinAge);
           String imgSrc = request.queryParams("imgSrc");
           activities.add(new Activity(name,price,time,capacity,minAge,imgSrc));
+          activities.get(activities.size()-1).setId(activities.size()-1);
           model.put("template", "templates/success-activity.vtl");
 
           return new ModelAndView(model, layout);
