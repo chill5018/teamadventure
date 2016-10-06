@@ -1,10 +1,14 @@
 import java.util.HashSet;
 import java.util.Map;
 import java.util.HashMap;
+
+import com.sun.javafx.tk.Toolkit;
+import com.sun.jmx.snmp.tasks.Task;
 import spark.ModelAndView;
 import template.VelocityTemplateEngine;
 import static spark.Spark.*;
 import java.util.ArrayList;
+
 
 public class App {
   private static ArrayList<Customer> customers = new ArrayList<>();
@@ -16,7 +20,14 @@ public class App {
     // Set path of Layout
     String layout = "templates/layout.vtl";
     staticFileLocation("/public");
-
+      activities.add(new Activity("Kart-Go",370, 21, 6, 12,"/Images/kart-go.jpg"));
+      activities.get(activities.size()-1).setId(activities.size()-1);
+      activities.add(new Activity("Mini Golf",210, 18, 20, 6,"/Images/minigolf.jpg"));
+      activities.get(activities.size()-1).setId(activities.size()-1);
+      activities.add(new Activity("Paintball",200, 5, 20, 23, "/Images/paintball.jpg"));
+      activities.get(activities.size()-1).setId(activities.size()-1);
+      activities.add(new Activity("Sumo",180, 6, 06, 18, "/Images/sumo.png"));
+      activities.get(activities.size()-1).setId(activities.size()-1);
 
 
     // -----------------------------------//
@@ -73,32 +84,23 @@ public class App {
     get("/activities", (request, response) -> {
         boolean activityDemo=true;
      HashMap<String, Object> model = new HashMap<String, Object>();
-     activities = request.session().attribute("activities");
-        if (activities == null) {
-            activities = new ArrayList<Activity>();
-            activities.add(new Activity("Kart-Go",370, 21, 6, 12,"/Images/kart-go.jpg"));
-            activities.get(activities.size()-1).setId(activities.size()-1);
-            activities.add(new Activity("Mini Golf",210, 18, 20, 6,"/Images/minigolf.jpg"));
-            activities.get(activities.size()-1).setId(activities.size()-1);
-            activities.add(new Activity("Paintball",200, 5, 20, 23, "/Images/paintball.jpg"));
-            activities.get(activities.size()-1).setId(activities.size()-1);
-            activities.add(new Activity("Sumo",180, 6, 06, 18, "/Images/sumo.png"));
-            activities.get(activities.size()-1).setId(activities.size()-1);
-            request.session().attribute("activities", activities);
-        }
+        request.session().attribute("activities", activities);
 
-     model.put("activities", request.session().attribute("activities"));
+     model.put("activities", activities);
      model.put("template", "templates/activities-with-edit.vtl");
      return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
 
   //  // Show Selected Activity
-  //  get("/activities/:id", (request, response) -> {
-  //    HashMap<String, Object> model = new HashMap<String, Object>();
-  //    model.put("template", "templates/activites.vtl");
-  //    return new ModelAndView(model, layout);
-  //   }, new VelocityTemplateEngine());
+        get("/activities/:id/view", (request, response) -> {
+        HashMap<String, Object> model = new HashMap<String, Object>();
+        int id = Integer.parseInt(request.params(":id"));
+        Activity aux = activities.get(id);
+        model.put("activity", aux);
+        model.put("template", "templates/activity-view.vtl");
+        return new ModelAndView(model, layout);
+     }, new VelocityTemplateEngine());
   //
   //  // Edit Selected Activity
   //  get("/activities/:id/edit", (request, response) -> {
@@ -247,12 +249,38 @@ public class App {
           return new ModelAndView(model, layout);
       }, new VelocityTemplateEngine());
 
+      post("/activity/:id/edit", (request, response) -> {
+          HashMap<String, Object> model = new HashMap<String, Object>();
+          int id = Integer.parseInt(request.params(":id"));
+          String name = request.queryParams("name");
+          String sPrice = request.queryParams("price");
+          String sTime = request.queryParams("time");
+          String sCapacity = request.queryParams("capacity");
+          String sMinAge = request.queryParams("min-age");
+
+          Double price = Double.parseDouble(sPrice);
+          int time = Integer.parseInt(sTime);
+          int capacity = Integer.parseInt(sCapacity);
+          int minAge = Integer.parseInt(sMinAge);
+          String imgSrc = request.queryParams("imgSrc");
+
+          activities.get(id).setName(name);
+          activities.get(id).setImgSrc(imgSrc);
+          activities.get(id).setCapacity(capacity);
+          activities.get(id).setMinAge(minAge);
+          activities.get(id).setPrice(price);
+          activities.get(id).setTime(time);
+          model.put("template", "templates/success-activity.vtl");
+
+          return new ModelAndView(model, layout);
+      }, new VelocityTemplateEngine());
+
 
    // Booking Flow Step 2:
    get("/bookings/new/select-activity", (request, response) -> {
      HashMap<String, Object> model = new HashMap<String, Object>();
 
-       model.put("activities", request.session().attribute("activities"));
+       model.put("activities", activities);
      model.put("template", "templates/activities-booking.vtl");
      return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());
