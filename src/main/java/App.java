@@ -140,6 +140,13 @@ public class App {
     return new ModelAndView(model, layout);
   }, new VelocityTemplateEngine());
 
+//Edit Booking
+  get("/bookings/edit", (request, response) -> {
+   HashMap<String, Object> model = new HashMap<String, Object>();
+   model.put("template", "templates/bookings-edit.vtl");
+   return new ModelAndView(model, layout);
+ }, new VelocityTemplateEngine());
+
   // // View Booking with ID
   // get("/bookings/:id", (request, response) -> {
   //     HashMap<String, Object> model = new HashMap<String, Object>();
