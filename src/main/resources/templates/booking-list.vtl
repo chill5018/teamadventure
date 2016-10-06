@@ -1,0 +1,35 @@
+<h1>Bookings</h1>
+#if ($bookings)
+<table class="pg-table pg-customer-table">
+  <thead class="pg-table-head">
+    <tr class="pg-customer-table__header">
+      <th class="col-md-3">Date</th>
+      <th class="col-md-4">Customer</th>
+      <th class="pg-customer-table__rows--center-aligned col-md-2">Activity</th>
+      <th class="pg-customer-table__rows--center-aligned col-md-2">Quantity</th>
+      <th class="pg-customer-table__rows--right-aligned col-md-1">Phone</th>
+    </tr>
+  </thead>
+  <tbody class="pg-table-body pg-customer-table__rows" data-bind="foreach: teachers">
+    #foreach ($booking in $bookings)
+    <tr class="pg-customer-table__row-header">
+      <td>$booking.getDate()</td>
+
+      #if ($bookings.getCustomer()) // FIXME: 04-Oct-16
+         <td>$booking.getCustomer().getfName() $booking.getCustomer().getlName()</td>
+      #else
+         <td>$booking.getCustomer().getCompanyName()</td>
+      #end
+      <td class="customer-list-signed-up pg-customer-table__rows--center-aligned">$booking.getSelectedActivity()</td>
+      <td>$booking.getCustomer().getQuantity()</td>
+      <td>$booking.getCustomer().getTelNum()</td>
+      <td class="pg-customer-table__rows--center-aligned"> $booking.getCustomer().getReservationDate()</td>
+    </tr>
+    #end
+  </tbody>
+</table>
+
+
+#else
+  <p>No bookings!</p>
+#end

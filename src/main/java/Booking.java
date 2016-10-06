@@ -1,11 +1,10 @@
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.*;
+import java.util.List;
 
 public class Booking {
   private Activity selectedActivity;
   private Customer customer;
-  private Company company;
+  private Customer company;
   private double totalPrice;
   private static ArrayList<Booking> instances = new ArrayList<Booking>();
   private int id;
