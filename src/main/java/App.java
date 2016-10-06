@@ -41,27 +41,17 @@ public class App {
       //         Activity Overview          //
       //------------------------------------//
 
-      get("/activityoverview", (request, response) -> {
+      get("/activityoverview/:id", (request, response) -> {
           HashMap model = new HashMap();
+          int idBooking = Integer.parseInt(request.params(":id"));
+          request.session().attribute("idBooking", idBooking);
           model.put("template", "templates/activityoverview.vtl");
           return new ModelAndView(model, layout);
       }, new VelocityTemplateEngine());
 
     post("/activityoverview",(request,response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
-      activities = request.session().attribute("activityoverview");
-
-      if ( activities == null)
-      {
-        activities = new ArrayList<Activity>();
-        request.session().attribute("activityoverview", activities);
-      }
-
-      String time = request.queryParams("timetex  tbox");
-      Activity newActivity = new Activity("", 10 , 10, 10, 10, "url");
-      activities.add(newActivity);
-
-      model.put("template", "templates/activitysave.vtl");
+      model.put("template", "templates/activityoverview.vtl");
       return new ModelAndView(model,layout);
     },new VelocityTemplateEngine());
 
@@ -135,6 +125,7 @@ public class App {
    // View All Bookings
    get("/bookings", (request, response) -> {
     HashMap<String, Object> model = new HashMap<String, Object>();
+       model.put("bookings", bookings);
     model.put("template", "templates/bookings.vtl");
     return new ModelAndView(model, layout);
   }, new VelocityTemplateEngine());
@@ -277,16 +268,26 @@ public class App {
    // Booking Flow Step 2:
    get("/bookings/new/select-activity", (request, response) -> {
      HashMap<String, Object> model = new HashMap<String, Object>();
+       bookings = request.session().attribute("bookings");
+       if (bookings == null) {
+           bookings = new ArrayList<>();
+           request.session().attribute("bookings", bookings);
+       }
 
-       model.put("activities", activities);
+     model.put("activities", activities);
      model.put("template", "templates/activities-booking.vtl");
      return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());
 
    // Select Customer Type
-   get("/bookings/new/choose-customer-type", (request, response) -> {
+     post("/bookings/new/choose-customer-type", (request, response) -> {
      HashMap<String, Object> model = new HashMap<String, Object>();
-    //  model.put("bookings", Booking.all());
+         int id = request.session().attribute("idBooking");
+         String sTime = request.queryParams("timebox");
+         int time = Integer.parseInt(sTime);
+         activities.get(id).setTime(time);
+         Booking aux = new Booking(activities.get(id));
+         bookings.add(aux);
      model.put("template", "templates/customers-select.vtl");
      return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());
@@ -325,6 +326,7 @@ public class App {
      request.session().attribute("customers", customers);
    }
 
+
    /*
    Next, we create our Task object as we were already doing before,
    sand then we add it into customers with: customers.add(newTask);
@@ -338,7 +340,7 @@ public class App {
    String email = request.queryParams("email-indiv");
    Customer newCustomer = new Customer(fName, lName, phoneNum, email, null, 15, 2);
    customers.add(newCustomer); // Add new Customer to list of Customers
-
+     bookings.get(bookings.size()-1).setCustomer(newCustomer);
    model.put("template", "templates/customer-success.vtl");
    return new ModelAndView(model, layout);
  }, new VelocityTemplateEngine());
@@ -406,8 +408,8 @@ public class App {
      Map<String, Object> model = new HashMap<String, Object>();
      // Get the task created from the session and show it on the homepage
      model.put("customers", request.session().attribute("customers"));
-     //model.put("companies", request.session().attribute("companies"));
-     model.put("activities", request.session().attribute("activities"));
+     model.put("companies", request.session().attribute("companies"));
+     model.put("activities", activities);
      model.put("template", "templates/booking-overview.vtl");
      return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());

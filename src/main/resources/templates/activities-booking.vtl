@@ -9,7 +9,7 @@
       <div class="col-md-6 activity-button">
                   <div class="vbox">
                    <img src=$activity.getImgSrc() alt=$activity.getName() />
-                   <form class="select_time" action="/activityoverview" method="get">
+                   <form class="select_time" action="/activityoverview/$activity.getId()" method="get">
                    <button type="submit" class="btn btn-blue">$activity.getName()</button>
                    </form>
                   </div>

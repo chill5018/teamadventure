@@ -9,12 +9,30 @@ public class Booking {
   private static ArrayList<Booking> instances = new ArrayList<Booking>();
   private int id;
 
-  public Booking(Activity activity, Customer customer, Customer company) {
+
+  public Booking(Activity activity) {
     this.selectedActivity = activity;
-    this.customer = customer;
-    this.company = company;
-    this.totalPrice = totalPrice;
+
     this.id = instances.size();
+  }
+
+  public Booking(Customer customer)
+  {
+    this.customer = customer;
+  }
+
+  public Booking( Activity activity, Customer customer)
+  {
+    this.customer = customer;
+    this.selectedActivity = activity;
+  }
+
+  public void setSelectedActivity(Activity selectedActivity) {
+    this.selectedActivity = selectedActivity;
+  }
+
+  public void setCustomer(Customer customer) {
+    this.customer = customer;
   }
 
   public Activity getSelectedActivity() {

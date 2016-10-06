@@ -51,21 +51,21 @@ public class Demo {
     activities.add(goKarts);
 
 
-    Booking book1 = new Booking(paintball, cust1, null);
-    Booking book2 = new Booking(paintball, cust3, null);
-    Booking book3 = new Booking(sumo, cust5, null);
-    Booking book4 = new Booking(sumo, cust3, null);
-    Booking book5 = new Booking(paintball, cust2, null);
-    Booking book6 = new Booking(miniGolf, cust6, null);
-    Booking book7 = new Booking(miniGolf, cust7, null);
-    Booking book8 = new Booking(goKarts, cust8, null);
-    Booking book9 = new Booking(goKarts, cust10, null);
-    Booking book10 = new Booking(paintball, cust9, null);
-    Booking book11 = new Booking(sumo, cust4, null);
-    Booking book12 = new Booking(paintball, null, comp2);
-    Booking book13 = new Booking(miniGolf, null, comp3);
-    Booking book14 = new Booking(goKarts, null, comp1);
-    Booking book15 = new Booking(sumo, null, comp4);
+    Booking book1 = new Booking(paintball, cust1);
+    Booking book2 = new Booking(paintball, cust3);
+    Booking book3 = new Booking(sumo, cust5);
+    Booking book4 = new Booking(sumo, cust3);
+    Booking book5 = new Booking(paintball, cust2);
+    Booking book6 = new Booking(miniGolf, cust6);
+    Booking book7 = new Booking(miniGolf, cust7);
+    Booking book8 = new Booking(goKarts, cust8);
+    Booking book9 = new Booking(goKarts, cust10);
+    Booking book10 = new Booking(paintball, cust9);
+    Booking book11 = new Booking(sumo, cust4);
+    Booking book12 = new Booking(paintball, comp2);
+    Booking book13 = new Booking(miniGolf, comp3);
+    Booking book14 = new Booking(goKarts, comp1);
+    Booking book15 = new Booking(sumo, comp4);
 
     bookings.add(book1);
     bookings.add(book2);

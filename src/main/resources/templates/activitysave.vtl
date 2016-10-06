@@ -8,17 +8,16 @@ The time has been saved.
   <thead class="pg-table-head">
     <tr class="pg-activity-table__header">
       <th class="col-md-3">Name</th>
-      <th class="col-md-4">Place</th>
       <th class="pg-activity-table__rows--center-aligned col-md-2">Capacity</th>
       <th class="pg-activity-table__rows--center-aligned col-md-2">Age</th>
       <th class="pg-activity-table__rows--right-aligned col-md-1">Price</th>
       <th class="pg-activity-table__rows--right-aligned col-md-1">Time</th>
     </tr>
   </thead>
-  <tbody class="pg-table-body pg-activityr-table__rows" data-bind="foreach: teachers">
-    #foreach ($activity in $activites)
+  <tbody class="pg-table-body pg-activity-table__rows" data-bind="foreach: teachers">
+    #foreach ($activity in $activities)
     <tr class="pg-activity-table__row-header">
-      <td>$activity.getfName() $activity.getPlace()</td>
+      <td>$activity.getName()</td>
       <td>$activity.getCapacity()</td>
       <td class="customer-list-signed-up pg-activity-table__rows--center-aligned">$activity.getMinAge()</td>
       <td>$activity.getPrice()</td>
