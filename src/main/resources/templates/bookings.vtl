@@ -21,9 +21,9 @@
         <tbody class="pg-table-body pg-booking-table__rows" data-bind="foreach: teachers">
           #foreach ($booking in $bookings)
           <tr class="pg-booking-table__row-header">
-            <td>$booking.getDate() </td> // <!-- FIXME:  -->
-            <td>$booking.getCustomer().getfName $booking.getCustomer().getlName</td>
-            <td class="booking-list-signed-up pg-booking-table__rows--center-aligned">$booking.getNumOfPeople</td>
+            <td>$booking.getDate() </td> <!-- FIXME:  -->
+            <td>$booking.getCustomer().getfName() $booking.getCustomer().getlName()</td>
+            <td class="booking-list-signed-up pg-booking-table__rows--center-aligned">$booking.getCustomer().getNumOfPeople()</td>
             <td>$booking.getCustomer().getTelNum()</td>
             <td class="pg-booking-table__rows--center-aligned"> $booking.getSelectedActivity().getName()</td>
             <td class="pg-booking-table__rows--center-aligned"><a href='#edit'>Edit</a> </td>

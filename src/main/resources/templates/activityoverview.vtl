@@ -1,5 +1,8 @@
 <body>
     <h1> Type in the time </h1>
-    <input type="text" name="timetextbox" size="40" />
-    <a href="/bookings/new/choose-customer-type" class="btn btn-blue">Save</a>
+     <form action="/bookings/new/choose-customer-type" method="post">
+    <input id="timebox" type="text" name="timebox" class="form control" size="40" />
+
+        <button type="submit" class="btn btn-blue">Continue</button>
+    </form>
 </body>
