@@ -9,7 +9,7 @@ public class Booking {
   private static ArrayList<Booking> instances = new ArrayList<Booking>();
   private int id;
 
-  public Booking(Activity activity, Customer customer, Company company) {
+  public Booking(Activity activity, Customer customer, Customer company) {
     this.selectedActivity = activity;
     this.customer = customer;
     this.company = company;
