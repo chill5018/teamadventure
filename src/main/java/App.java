@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class App {
   private static ArrayList<Customer> customers = new ArrayList<>();
-  private static ArrayList<Company> companies = new ArrayList<>();
   private static ArrayList<Activity> activities = new ArrayList<>();
   private static ArrayList<Booking> bookings = new ArrayList<>();
 
@@ -183,69 +182,31 @@ public class App {
     return new ModelAndView(model, layout);
   }, new VelocityTemplateEngine());
 
-  post("/companies", (request, response) -> {
-    Map<String, Object> model = new HashMap<String, Object>();
+  post("/activity", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      activities = new ArrayList<Activity>();
+      activities = request.session().attribute("activities");
+      if (activities == null) {
+          request.session().attribute("activities", activities);
+      }
 
-    /*
-    If request.session().attribute("companies"); returned null, then our variable
-    companies will be referencing null. So we can use if (companies == null) to create
-    and save companies into the session. We create a new empty ArrayList of Customers
-    with the line companies = new ArrayList<Task>();. Then, we save that new
-    ArrayList of Customers into the session with
-    request.session().attribute("companies", companies);.
-    */
+      String name = request.queryParams("name");
+      String sPrice = request.queryParams("price");
+      String sTime = request.queryParams("time");
+      String sCapacity = request.queryParams("capacity");
+      String sMinAge = request.queryParams("min-age");
 
-    ArrayList<Company> companies = request.session().attribute("companies");
-    if (companies == null) {
-      companies = new ArrayList<Company>();
-      request.session().attribute("companies", companies);
-    }
+      Double price = Double.parseDouble(sPrice);
+      int time = Integer.parseInt(sTime);
+      int capacity = Integer.parseInt(sCapacity);
+      int minAge = Integer.parseInt(sMinAge);
+      String imgSrc = request.queryParams("imgSrc");
+      activities.add(new Activity(name,price,time,capacity,minAge,imgSrc));
+      activities.get(activities.size()-1).setId(activities.size()-1);
+      model.put("template", "templates/success-activity.vtl");
 
-    /*
-    Next, we create our Task object as we were already doing before,
-    sand then we add it into companies with: companies.add(newTask);
-    */
-    String compName = request.queryParams("company_name");
-    String fName = request.queryParams("first_name");
-    String lName = request.queryParams("last_name");
-    String sNumOfPeople = request.queryParams("company_size");
-    String sMinAge = request.queryParams("min_age");
-    int numOfPeople = Integer.parseInt(sNumOfPeople);
-    int minAge = Integer.parseInt(sMinAge);
-    String phoneNum = request.queryParams("phone_number");
-    String email = request.queryParams("email");
-    Company newCompany = new Company(compName,fName, lName, phoneNum, email, null, minAge, numOfPeople);
-    companies.add(newCompany); // Add new Company to list of Companies
-
-    model.put("template", "templates/company-success.vtl");
-    return new ModelAndView(model, layout);
+      return new ModelAndView(model, layout);
   }, new VelocityTemplateEngine());
-
-      post("/activity", (request, response) -> {
-          HashMap<String, Object> model = new HashMap<String, Object>();
-          activities = new ArrayList<Activity>();
-          activities = request.session().attribute("activities");
-          if (activities == null) {
-              request.session().attribute("activities", activities);
-          }
-
-          String name = request.queryParams("name");
-          String sPrice = request.queryParams("price");
-          String sTime = request.queryParams("time");
-          String sCapacity = request.queryParams("capacity");
-          String sMinAge = request.queryParams("min-age");
-
-          Double price = Double.parseDouble(sPrice);
-          int time = Integer.parseInt(sTime);
-          int capacity = Integer.parseInt(sCapacity);
-          int minAge = Integer.parseInt(sMinAge);
-          String imgSrc = request.queryParams("imgSrc");
-          activities.add(new Activity(name,price,time,capacity,minAge,imgSrc));
-          activities.get(activities.size()-1).setId(activities.size()-1);
-          model.put("template", "templates/success-activity.vtl");
-
-          return new ModelAndView(model, layout);
-      }, new VelocityTemplateEngine());
 
 
    // Booking Flow Step 2:

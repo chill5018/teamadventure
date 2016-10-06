@@ -1,10 +1,12 @@
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ClaudiuRBC and Gosia on 9/29/2016.
+ * Updated by Benny and Oana on 10/6/2016.
  */
 public class Customer {
+    private String companyName;
     private String fName;
     private String lName;
     private String telNum;
@@ -20,6 +22,18 @@ public class Customer {
 
     }
 
+    public Customer(String companyName, String fName, String lName, String telNum, String email, String reservationDate, int age, int numOfPeople) {
+        this.companyName = companyName;
+        this.fName = fName;
+        this.lName = lName;
+        this.telNum = telNum;
+        this.email = email;
+        this.age = age;
+        this.numOfPeople = numOfPeople;
+        this.reservationDate = reservationDate;
+        this.id = instances.size();
+    }
+
     public Customer(String fName, String lName, String telNum, String email, String reservationDate, int age, int numOfPeople) {
         this.fName = fName;
         this.lName = lName;
@@ -29,7 +43,14 @@ public class Customer {
         this.numOfPeople = numOfPeople;
         this.reservationDate = reservationDate;
         this.id = instances.size();
+    }
 
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
     public String getEmail() {
