@@ -19,19 +19,19 @@ public class App {
     String layout = "templates/layout.vtl";
     String layoutIndex = "templates/layout-index.vtl";
     staticFileLocation("/public");
-      activities.add(new Activity("Kart-Go",370, 21, 6, 12,"/Images/kart-go.jpg"));
+      activities.add(new Activity("Kart-Go",370, 21, 6, 12,"/images/kart-go.jpg"));
       activities.get(activities.size()-1).setId(activities.size()-1);
-      activities.add(new Activity("Mini-Golf",210, 18, 20, 6,"/Images/minigolf.jpg"));
+      activities.add(new Activity("Mini-Golf",210, 18, 20, 6,"/images/minigolf.jpg"));
       activities.get(activities.size()-1).setId(activities.size()-1);
-      activities.add(new Activity("Paintball",200, 5, 20, 23, "/Images/paintball.jpg"));
+      activities.add(new Activity("Paintball",200, 5, 20, 23, "/images/paintball.jpg"));
       activities.get(activities.size()-1).setId(activities.size()-1);
-      activities.add(new Activity("Sumo",180, 6, 06, 18, "/Images/sumo.png"));
+      activities.add(new Activity("Sumo",180, 6, 06, 18, "/images/sumo.png"));
       activities.get(activities.size()-1).setId(activities.size()-1);
 
-      items.add(new Item("Popcorn", 20.00, "Deliciously fresh baked movie like butter popcorn"));
-      items.add(new Item("Bacon", 13.99, "Fresh and saucy pig rear bacon"));
-      items.add(new Item("Coca-Cola", 13.32, "World wide knonw refreshment drink"));
-      items.add(new Item("Sparkling water", 15.43, "Refreshing and cooling natural source sparkling water"));
+      items.add(new Item("Popcorn", 20.00, "Deliciously fresh baked movie like butter popcorn", "/images/popcorn.jpg"));
+      items.add(new Item("Bacon", 13.99, "Fresh and saucy pig rear bacon", "/images/bacon.jpg"));
+      items.add(new Item("Coca-Cola", 13.32, "World wide knonw refreshment drink","images/coca-cola.JPG"));
+      items.add(new Item("Sparkling water", 15.43, "Refreshing and cooling natural source sparkling water","images/water.JPG"));
 
 
     // -----------------------------------//
@@ -126,6 +126,13 @@ public class App {
     get("/activities/new", (request, response) -> {
      HashMap<String, Object> model = new HashMap<String, Object>();
      model.put("template", "templates/activity-new.vtl");
+     return new ModelAndView(model, layout);
+   }, new VelocityTemplateEngine());
+
+   // Show the Create new Activity Form
+    get("/items/new", (request, response) -> {
+     HashMap<String, Object> model = new HashMap<String, Object>();
+     model.put("template", "templates/items-new.vtl");
      return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());
 
@@ -419,6 +426,44 @@ public class App {
      model.put("activities", activities);
      model.put("template", "templates/booking-overview.vtl");
      return new ModelAndView(model, layout);
+   }, new VelocityTemplateEngine());
+
+   // -----------------------------------//
+   //             Items                  //
+   //------------------------------------//
+
+   // Show All items "with the view button"
+   get("/items", (request, response) -> {
+       boolean activityDemo=true;
+    HashMap<String, Object> model = new HashMap<String, Object>();
+       request.session().attribute("items",items);
+
+    model.put("items", items);
+    model.put("template", "templates/items.vtl");
+    return new ModelAndView(model, layout);
+   }, new VelocityTemplateEngine());
+
+   // handling user input for the add new item
+
+   post("/new-item", (request, response) -> {
+       HashMap<String, Object> model = new HashMap<String, Object>();
+       items = new ArrayList<Item>();
+       items = request.session().attribute("items");
+       if (items == null) {
+           request.session().attribute("items", items);
+       }
+
+       // getting data from the input fields
+       String name = request.queryParams("name");
+       String price = request.queryParams("price");
+       String description = request.queryParams("description");
+       String imageUrl = request.queryParams("imageUrl");
+
+       items.add(new Item(name,Double.parseDouble(price),description,imageUrl));
+       //items.get(items.size()-1).setId(items.size()-1);
+       model.put("template", "templates/index.vtl");
+
+       return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());
 
   }
