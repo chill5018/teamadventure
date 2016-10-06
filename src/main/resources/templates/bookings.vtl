@@ -1,8 +1,45 @@
 <section>
   <p class="main-header-subtitle">Existing Booking</p>
+  <div class="search_bar">
+    <input id="search_bar" name="search_bar" class="form-control  col-xs-6" type="text">
+      <button type="search_btn" class="btn btn-blue col-xs-6">Search</button>
+  </div>
   <div class="new-booking__main">
-    <div class="new-booking__individual-button col-xs-6">
-      
+      #if ($bookings)
+      <table class="pg-table pg-booking-table">
+        <thead class="pg-table-head">
+          <tr class="pg-booking-table__header">
+            <th class="col-md-2">Date</th>
+            <th class="col-md-3">Name</th>
+            <th class="pg-booking-table__rows--center-aligned col-md-1">Party Size</th>
+            <th class="pg-booking-table__rows--center-aligned col-md-2">Phone</th>
+            <th class="pg-booking-table__rows--right-aligned col-md-2">Activity</th>
+            <th class="pg-booking-table__rows--right-aligned col-md-1"></th>
+            <th class="pg-booking-table__rows--right-aligned col-md-1"></th>
+          </tr>
+        </thead>
+        <tbody class="pg-table-body pg-booking-table__rows" data-bind="foreach: teachers">
+          #foreach ($booking in $bookings)
+          <tr class="pg-booking-table__row-header">
+            <td>$booking.getDate() </td> // <!-- FIXME:  -->
+            <td>$booking.getCustomer().getfName $booking.getCustomer().getlName</td>
+            <td class="booking-list-signed-up pg-booking-table__rows--center-aligned">$booking.getNumOfPeople</td>
+            <td>$booking.getCustomer().getTelNum()</td>
+            <td class="pg-booking-table__rows--center-aligned"> $booking.getSelectedActivity().getName()</td>
+            <td class="pg-booking-table__rows--center-aligned"><a href='#edit'>Edit</a> </td>
+            <td class="pg-booking-table__rows--center-aligned"><a href='#cancel'>Cancel</a></td>
+          </tr>
+          #end
+        </tbody>
+      </table>
+
+
+      #else
+        <p>No bookings!</p>
+      #end
+
+
+
     </div>
   </div>
 </section>
