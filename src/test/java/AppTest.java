@@ -44,7 +44,7 @@ public class AppTest extends FluentTest {
     goTo("http://localhost:4567/bookings/new/create-company");
     fill("#company_name").with("Nike");
     submit(".btn-blue");
-    goTo("http://localhost:4567/companies/all");
+    goTo("http://localhost:4567/customers/all");
     assertThat(pageSource()).contains("Nike");
   }
   //
