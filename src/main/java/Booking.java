@@ -1,16 +1,15 @@
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.*;
+import java.util.List;
 
 public class Booking {
   private Activity selectedActivity;
   private Customer customer;
-  private Company company;
+  private Customer company;
   private double totalPrice;
   private static ArrayList<Booking> instances = new ArrayList<Booking>();
   private int id;
 
-  public Booking(Activity activity, Customer customer, Company company) {
+  public Booking(Activity activity, Customer customer, Customer company) {
     this.selectedActivity = activity;
     this.customer = customer;
     this.company = company;

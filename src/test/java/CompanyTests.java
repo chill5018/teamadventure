@@ -5,8 +5,8 @@ public class CompanyTests {
 
     @Test
     public void company_isCreatedCorrectly(){
-        Company testCompany = new Company("Extreme Tech Nerds" ,"Claudiu","Robciuc","533243", "test@example.com","02-09-2016-20:30",20, 4);
-        assertEquals("Extreme Tech Nerds", testCompany.getCompName());
+        Customer testCompany = new Customer("Extreme Tech Nerds" ,"Claudiu","Robciuc","533243", "test@example.com","02-09-2016-20:30",20, 4);
+        assertEquals("Extreme Tech Nerds", testCompany.getCompanyName());
         assertEquals("Claudiu", testCompany.getfName());
         assertEquals("Robciuc", testCompany.getlName());
         assertEquals("533243", testCompany.getTelNum());
@@ -14,5 +14,4 @@ public class CompanyTests {
         assertEquals(20, testCompany.getAge());
         assertEquals(4, testCompany.getNumOfPeople());
     }
-
 }

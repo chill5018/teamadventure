@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Demo {
   public static ArrayList<Customer> customers = new ArrayList<>();
-  public static ArrayList<Company> companies = new ArrayList<>();
+  public static ArrayList<Customer> companies = new ArrayList<>();
   public static ArrayList<Activity> activities = new ArrayList<>();
   public static ArrayList<Booking> bookings = new ArrayList<>();
 
@@ -29,10 +29,10 @@ public class Demo {
     customers.add(cust9);
     customers.add(cust10);
 
-    Company comp1 = new Company("Extreme Tech Nerds" ,"Bill","Clinton","453323443", "company1@company.com","12-10-2016-20:30",42, 34);
-    Company comp2 = new Company("Rainmaking Lofts" ,"Per","Larsen","45134124", "company2@company.com","11-10-2016-20:30",23, 15);
-    Company comp3 = new Company("Rocket Labs" ,"Javier","Rivera","451391341", "company3@company.com","11-10-2016-20:30",18, 24);
-    Company comp4 = new Company("Nerds R Us" ,"Andrei","Dogaru","4569812423", "company4@company.com","18-10-2016-20:30",19, 4);
+    Customer comp1 = new Customer("Extreme Tech Nerds" ,"Bill","Clinton","453323443", "Customer1@Customer.com","12-10-2016-20:30",42, 34);
+    Customer comp2 = new Customer("Rainmaking Lofts" ,"Per","Larsen","45134124", "Customer2@Customer.com","11-10-2016-20:30",23, 15);
+    Customer comp3 = new Customer("Rocket Labs" ,"Javier","Rivera","451391341", "Customer3@Customer.com","11-10-2016-20:30",18, 24);
+    Customer comp4 = new Customer("Nerds R Us" ,"Andrei","Dogaru","4569812423", "Customer4@Customer.com","18-10-2016-20:30",19, 4);
 
     companies.add(comp1);
     companies.add(comp2);
@@ -40,10 +40,10 @@ public class Demo {
     companies.add(comp4);
 
 
-    Activity paintball = new Activity("Paintball", 500, 1500, 15, 12,"images/kart-g.jpg");
-    Activity sumo = new Activity("Sumo", 200, 1500, 15, 12, "images/minigolf.jpg");
-    Activity miniGolf = new Activity("MiniGolf", 200, 1500, 15, 2, "images/paintball.jpg");
-    Activity goKarts = new Activity("Go-Kart", 200, 1500, 15, 12, "images/sumo.png");
+    Activity paintball = new Activity("Paintball", 500, 1500, 15, 12,"Images/kart-g.jpg");
+    Activity sumo = new Activity("Sumo", 200, 1500, 15, 12, "Images/minigolf.jpg");
+    Activity miniGolf = new Activity("MiniGolf", 200, 1500, 15, 2, "Images/paintball.jpg");
+    Activity goKarts = new Activity("Go-Kart", 200, 1500, 15, 12, "Images/sumo.png");
 
     activities.add(paintball);
     activities.add(sumo);
@@ -88,7 +88,7 @@ public class Demo {
     return customers;
   }
 
-  public static ArrayList<Company> getCompanies() {
+  public static ArrayList<Customer> getCompanies() {
     return companies;
   }
 
