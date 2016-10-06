@@ -317,7 +317,7 @@ public class App {
    // int minAge = Integer.parseInt(request.queryParams("min_age"));
    String phoneNum = request.queryParams("phone_number");
    String email = request.queryParams("email");
-   Customer newCompany = new Customer(compName,fName, lName, phoneNum, email, null, 15, 2);
+   Customer newCompany = new Customer(compName, fName, lName, phoneNum, email, null, 15, 2);
    customers.add(newCompany); // Add new Company to list of Companies
 
    model.put("template", "templates/company-success.vtl");

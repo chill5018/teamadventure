@@ -18,6 +18,8 @@ public class Customer {
     private static ArrayList<Customer> instances = new ArrayList<Customer>();
     private int id;
 
+    private boolean comp;
+
     public Customer() {
 
     }
@@ -32,6 +34,7 @@ public class Customer {
         this.numOfPeople = numOfPeople;
         this.reservationDate = reservationDate;
         this.id = instances.size();
+        this.comp = true;
     }
 
     public Customer(String fName, String lName, String telNum, String email, String reservationDate, int age, int numOfPeople) {
@@ -43,6 +46,7 @@ public class Customer {
         this.numOfPeople = numOfPeople;
         this.reservationDate = reservationDate;
         this.id = instances.size();
+        this.comp = false;
     }
 
     public String getCompanyName() {
@@ -117,4 +121,7 @@ public class Customer {
      return id;
     }
 
+    public boolean isComp() {
+        return comp;
+    }
 }
