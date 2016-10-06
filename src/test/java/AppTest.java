@@ -71,12 +71,13 @@ public class AppTest extends FluentTest {
   @Test
   public  void activityMinigolfTest(){
     goTo("http://localhost:4567/activities");
-    assertThat(pageSource()).contains("Mini Golf");
+    assertThat(pageSource()).contains("Mini-Golf");
   }
 
   @Test
   public void createActivityTest()
   {
+
     goTo("http://localhost:4567/activities");
     click(".btn", withText("Add activity"));
     fill("#name").with("Judo");
@@ -88,6 +89,25 @@ public class AppTest extends FluentTest {
     submit(".btn-blue");
     goTo("http://localhost:4567/activities");
     assertThat(pageSource().contains("Judo"));
+
+  }
+
+  @Test
+  public void editActivityPaintBallTest()
+  {
+    createActivityTest();
+    goTo("http://localhost:4567/activities");
+    click(".btn", withText("Paintball"));
+    fill("#name").with("Swimming");
+    fill("#price").with("22");
+    fill("#time").with("18");
+    fill("#capacity").with("12");
+    fill("#min-age").with("16");
+    submit(".btn-blue");
+    goTo("http://localhost:4567/activities");
+    click(".btn", withText("Swimming"));
+    assertThat(pageSource().contains("Swimming"));
+
 
   }
   // // Test to see if our newly created task

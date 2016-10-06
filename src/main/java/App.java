@@ -22,7 +22,7 @@ public class App {
     staticFileLocation("/public");
       activities.add(new Activity("Kart-Go",370, 21, 6, 12,"/Images/kart-go.jpg"));
       activities.get(activities.size()-1).setId(activities.size()-1);
-      activities.add(new Activity("Mini Golf",210, 18, 20, 6,"/Images/minigolf.jpg"));
+      activities.add(new Activity("Mini-Golf",210, 18, 20, 6,"/Images/minigolf.jpg"));
       activities.get(activities.size()-1).setId(activities.size()-1);
       activities.add(new Activity("Paintball",200, 5, 20, 23, "/Images/paintball.jpg"));
       activities.get(activities.size()-1).setId(activities.size()-1);
