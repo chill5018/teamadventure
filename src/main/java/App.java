@@ -12,6 +12,7 @@ public class App {
   private static ArrayList<Customer> customers = new ArrayList<>();
   private static ArrayList<Activity> activities = new ArrayList<>();
   private static ArrayList<Booking> bookings = new ArrayList<>();
+  private static ArrayList<Item> items = new ArrayList<>();
 
   public static void main(String[] args) {
     // Set path of Layout
@@ -26,6 +27,11 @@ public class App {
       activities.get(activities.size()-1).setId(activities.size()-1);
       activities.add(new Activity("Sumo",180, 6, 06, 18, "/Images/sumo.png"));
       activities.get(activities.size()-1).setId(activities.size()-1);
+
+      items.add(new Item("Popcorn", 20.00, "Deliciously fresh baked movie like butter popcorn"));
+      items.add(new Item("Bacon", 13.99, "Fresh and saucy pig rear bacon"));
+      items.add(new Item("Coca-Cola", 13.32, "World wide knonw refreshment drink"));
+      items.add(new Item("Sparkling water", 15.43, "Refreshing and cooling natural source sparkling water"));
 
 
     // -----------------------------------//

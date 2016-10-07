@@ -1,0 +1,26 @@
+
+<div class="main-header-container">
+  <p class="main-header-subtitle">Activities</p>
+</div>
+
+
+<div class="main-wrapper">
+    #if($Items)
+     #foreach ($Item in $Items)
+      <div class="col-md-6 Item-button">
+                  <div class="vbox">
+                   <img src=$Item.getImgSrc() alt=$Item.getName() />
+                   <button type=$Item.getName() class="btn btn-blue">$Item.getName()</button>
+                  </div>
+      </div>
+     #end
+    #else
+        <p>No Items!</p>
+    #end
+    <div class="col-xs-12 Item-button">
+
+        <!-- <form class="new_Item" action="/Items/new" method="get">
+            <button type="submit" class="btn btn-blue" >Add Item</button>
+        </form> -->
+    </div>
+</div>
