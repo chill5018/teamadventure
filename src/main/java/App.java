@@ -15,6 +15,7 @@ public class App {
 
   public static void main(String[] args) {
     // Set path of Layout
+    Demo demo = new Demo();
     String layout = "templates/layout.vtl";
     staticFileLocation("/public");
 
@@ -353,13 +354,20 @@ public class App {
    post("/bookings/load", (request, response) -> {
      HashMap<String, Object> model = new HashMap<String, Object>();
     //  model.put("bookings", Booking.all());
-    ArrayList<Booking> bookings = request.session().attribute("bookings");
-      bookings = Demo.getBookings();
-      request.session().attribute("bookings", bookings);
+      //bookings = new ArrayList<Booking>();
+      bookings = request.session().attribute("booking-demo");
+      bookings = demo.bookings;
+      request.session().attribute("booking-demo", bookings);
 
-    // System.out.println("1. customer: paintball/caludi"+bookings.get(0).getSelectedActivity().getName()+" "+bookings.get(0).getCustomer().getfName());
-     System.out.println(bookings.size());
-     model.put("template", "templates/bookings.vtl");
+      /*Customer c1 = new Customer("Filio", "Malek", "3424234", "fila@fila.com", "1. January 2032.", 167, 1);
+      Activity a1 = new Activity("Airsoft", 455.32, 1356, 21, 16, null);
+      Booking b1 = new Booking(a1, c1,null);
+      bookings.add(b1);
+      request.session().attribute("bookings", bookings);*/
+
+      // System.out.println("1. customer: paintball/caludi"+bookings.get(0).getSelectedActivity().getName()+" "+bookings.get(0).getCustomer().getfName());
+     System.out.println("Size of the booking array: "+bookings.size());
+     model.put("template", "templates/booking-overview-success.vtl");
 
      return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());
@@ -367,7 +375,7 @@ public class App {
    get("/bookings", (request, response) -> {
      Map<String, Object> model = new HashMap<String, Object>();
      // Get the task created from the session and show it on the homepage
-     model.put("bookings", request.session().attribute("bookings"));
+     model.put("booking-demo", request.session().attribute("booking-demo"));
      model.put("template", "templates/bookings-overview.vtl");
      return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());

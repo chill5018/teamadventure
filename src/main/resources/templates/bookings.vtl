@@ -19,7 +19,7 @@
             <th class="pg-booking-table__rows--right-aligned col-md-1"></th>
           </tr>
         </thead>
-        <tbody class="pg-table-body pg-booking-table__rows" data-bind="foreach: teachers">
+        <tbody class="pg-table-body pg-booking-table__rows">
           #foreach ($booking in $bookings)
           <tr class="pg-booking-table__row-header">
             <td>$booking.getDate() </td> // <!-- FIXME:  -->
@@ -37,5 +37,4 @@
         <p>No bookings!</p>
       #end
     </div>
-  </div>
 </section>
