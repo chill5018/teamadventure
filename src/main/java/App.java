@@ -9,15 +9,14 @@ import java.util.ArrayList;
 public class App {
   private static ArrayList<Customer> customers = new ArrayList<>();
   private static ArrayList<Company> companies = new ArrayList<>();
-  private static HashSet<Activity> activities = new HashSet<>();
+  private static ArrayList<Activity> activities = new ArrayList<>();
   private static ArrayList<Booking> bookings = new ArrayList<>();
+  private static ArrayList<Integer> searchArray = new ArrayList<>();
 
   public static void main(String[] args) {
     // Set path of Layout
     String layout = "templates/layout.vtl";
     staticFileLocation("/public");
-
-
 
     // -----------------------------------//
     //               HOMEPAGE             //
@@ -45,7 +44,7 @@ public class App {
 
       if ( activities == null)
       {
-        activities = new HashSet<Activity>();
+        activities = new ArrayList<Activity>();
         request.session().attribute("activityoverview", activities);
       }
 
@@ -73,14 +72,14 @@ public class App {
     get("/activities", (request, response) -> {
         boolean activityDemo=true;
      HashMap<String, Object> model = new HashMap<String, Object>();
-     activities = request.session().attribute("activities");
+     HashSet<Activity> activities = request.session().attribute("activities");
         if (activities == null) {
             activities = new HashSet<Activity>();
-            activities.add(new Activity("Kart-Go",370, 21, 6, 12,"/Images/kart-go.jpg"));
-            activities.add(new Activity("Mini Golf",210, 18, 20, 6,"/Images/minigolf.jpg"));
-            activities.add(new Activity("Paintball",200, 5, 20, 23, "/Images/paintball.jpg"));
-            activities.add(new Activity("Sumo",180, 6, 06, 18, "/Images/sumo.png"));
             request.session().attribute("activities", activities);
+            activities.add(new Activity("Kart-Go",370, 21, 6, 12,"/images/kart-go.jpg"));
+            activities.add(new Activity("Mini Golf",210, 18, 20, 6,"/images/minigolf.jpg"));
+            activities.add(new Activity("Paintball",200, 5, 20, 23, "/images/paintball.jpg"));
+            activities.add(new Activity("Sumo",180, 6, 06, 18, "/images/sumo.png"));
         }
 
      model.put("activities", request.session().attribute("activities"));
@@ -118,7 +117,9 @@ public class App {
    // Activity Selector for Booking
     get("/bookings/new/choose-activity", (request, response) -> {
      HashMap<String, Object> model = new HashMap<String, Object>();
-     model.put("template", "templates/activities.vtl");
+     model.put("activities", request.session().attribute("activities"));
+     model.put("customers", request.session().attribute("customers"));
+     model.put("template", "templates/bookings.vtl");
      return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());
 
@@ -204,13 +205,11 @@ public class App {
     String compName = request.queryParams("company_name");
     String fName = request.queryParams("first_name");
     String lName = request.queryParams("last_name");
-    String sNumOfPeople = request.queryParams("company_size");
-    String sMinAge = request.queryParams("min_age");
-    int numOfPeople = Integer.parseInt(sNumOfPeople);
-    int minAge = Integer.parseInt(sMinAge);
+    //int numOfPeople = Integer.parseInt(request.queryParams("company_size"));
+    // int minAge = Integer.parseInt(request.queryParams("min_age"));
     String phoneNum = request.queryParams("phone_number");
     String email = request.queryParams("email");
-    Company newCompany = new Company(compName,fName, lName, phoneNum, email, null, minAge, numOfPeople);
+    Company newCompany = new Company(compName,fName, lName, phoneNum, email, null, 15, 2);
     companies.add(newCompany); // Add new Company to list of Companies
 
     model.put("template", "templates/company-success.vtl");
@@ -219,22 +218,17 @@ public class App {
 
       post("/activity", (request, response) -> {
           HashMap<String, Object> model = new HashMap<String, Object>();
-          activities = new HashSet<Activity>();
-          activities = request.session().attribute("activities");
+          ArrayList<Activity> activities = request.session().attribute("activities");
           if (activities == null) {
-              request.session().attribute("activities", activities);
+              activities = new ArrayList<>();
+              request.session().attribute("activity", activities);
           }
 
           String name = request.queryParams("name");
-          String sPrice = request.queryParams("price");
-          String sTime = request.queryParams("time");
-          String sCapacity = request.queryParams("capacity");
-          String sMinAge = request.queryParams("min-age");
-
-          Double price = Double.parseDouble(sPrice);
-          int time = Integer.parseInt(sTime);
-          int capacity = Integer.parseInt(sCapacity);
-          int minAge = Integer.parseInt(sMinAge);
+          Double price = Double.parseDouble(request.params("price"));
+          int time = Integer.parseInt(request.queryParams("time"));
+          int capacity = Integer.parseInt(request.queryParams("capacity"));
+          int minAge = Integer.parseInt(request.queryParams("min-age"));
           String imgSrc = request.queryParams("imgSrc");
           activities.add(new Activity(name,price,time,capacity,minAge,imgSrc));
           model.put("template", "templates/success-activity.vtl");
@@ -242,12 +236,18 @@ public class App {
           return new ModelAndView(model, layout);
       }, new VelocityTemplateEngine());
 
+  // Show the Create new Activity Form
+   get("/activities/new", (request, response) -> {
+    HashMap<String, Object> model = new HashMap<String, Object>();
+    model.put("template", "templates/activites-new.vtl");
+    return new ModelAndView(model, layout);
+  }, new VelocityTemplateEngine());
 
    // Booking Flow Step 2:
    get("/bookings/new/select-activity", (request, response) -> {
      HashMap<String, Object> model = new HashMap<String, Object>();
-
-       model.put("activities", request.session().attribute("activities"));
+    //  model.put("bookings", Booking.all());
+    model.put("activities", request.session().attribute("activities"));
      model.put("template", "templates/activities-booking.vtl");
      return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());
@@ -350,10 +350,25 @@ public class App {
 
 
    // "Save / Update" a booking
-   post("/bookings", (request, response) -> {
+   post("/bookings/load", (request, response) -> {
      HashMap<String, Object> model = new HashMap<String, Object>();
     //  model.put("bookings", Booking.all());
-     model.put("template", "templates/booking-success.vtl");
+    ArrayList<Booking> bookings = request.session().attribute("bookings");
+      bookings = Demo.getBookings();
+      request.session().attribute("bookings", bookings);
+
+    // System.out.println("1. customer: paintball/caludi"+bookings.get(0).getSelectedActivity().getName()+" "+bookings.get(0).getCustomer().getfName());
+     System.out.println(bookings.size());
+     model.put("template", "templates/bookings.vtl");
+
+     return new ModelAndView(model, layout);
+   }, new VelocityTemplateEngine());
+
+   get("/bookings", (request, response) -> {
+     Map<String, Object> model = new HashMap<String, Object>();
+     // Get the task created from the session and show it on the homepage
+     model.put("bookings", request.session().attribute("bookings"));
+     model.put("template", "templates/bookings-overview.vtl");
      return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());
 
@@ -386,6 +401,17 @@ public class App {
      model.put("template", "templates/booking-overview.vtl");
      return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());
+
+   post("/search", (request, response) -> {
+    HashMap<String, Object> model = new HashMap<String, Object>();
+    String telnum = request.queryParams("search");
+    int realNum = Integer.parseInt(telnum);
+    System.out.println("Entered number: "+realNum);
+    // now to put that number in the array so we can use it later
+    searchArray.add(realNum);
+    model.put("template", "templates/search_results.vtl");
+    return new ModelAndView(model, layout);
+  }, new VelocityTemplateEngine());
 
   }
 }

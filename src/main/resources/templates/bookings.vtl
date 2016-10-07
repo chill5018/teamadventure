@@ -1,10 +1,11 @@
 <section>
   <p class="main-header-subtitle">Existing Booking</p>
-  <div class="search_bar">
-    <input id="search_bar" name="search_bar" class="form-control  col-xs-6" type="text">
-      <button type="search_btn" class="btn btn-blue col-xs-6">Search</button>
-  </div>
-  <div class="new-booking__main">
+<form action="/search" method="post">
+    <label for="description">Search by tel number:</label>
+    <input id="search" name="search" type="text">
+    <button type="submit" class="btn btn-default">Search</button>
+</form>
+<div class="new-booking__main">
       #if ($bookings)
       <table class="pg-table pg-booking-table">
         <thead class="pg-table-head">
@@ -32,14 +33,9 @@
           #end
         </tbody>
       </table>
-
-
       #else
         <p>No bookings!</p>
       #end
-
-
-
     </div>
   </div>
 </section>
