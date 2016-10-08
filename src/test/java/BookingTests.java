@@ -11,7 +11,9 @@ public class BookingTests {
         Booking testBooking = new Booking(testActivity, testCustomer);
         assertEquals(true, testActivity instanceof Activity);
         assertEquals(true, testCustomer instanceof Customer);
-
+        Booking testBooking2 = new Booking(testActivity, testCompany);
+        assertEquals(true, testActivity instanceof Activity);
+        assertEquals(true, testCompany instanceof Customer);
         // assertEquals(testCustomer.getNumOfPeople()*testActivity.getPrice(), testBooking.getTotalPriceFamily());
         // assertEquals(testCompany.getNumOfPeople()*testActivity.getPrice(), testBooking.getTotalPriceCompany());
     }
