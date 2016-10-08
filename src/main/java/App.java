@@ -16,6 +16,7 @@ public class App {
   public static void main(String[] args) {
     // Set path of Layout
     String layout = "templates/layout.vtl";
+    String layoutIndex = "templates/layout-index.vtl";
     staticFileLocation("/public");
       activities.add(new Activity("Kart-Go",370, 21, 6, 12,"/Images/kart-go.jpg"));
       activities.get(activities.size()-1).setId(activities.size()-1);
@@ -33,7 +34,7 @@ public class App {
     get("/", (request, response) -> {
       HashMap model = new HashMap();
       model.put("template", "templates/index.vtl");
-      return new ModelAndView(model, layout);
+      return new ModelAndView(model, layoutIndex);
     }, new VelocityTemplateEngine());
 
 
