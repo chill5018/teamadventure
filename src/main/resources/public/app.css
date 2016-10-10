@@ -1,7 +1,7 @@
 /* Default Global Styles */
 
 body {
-  background-image: url("Images/background-other_pages.png");
+  background-image: url("images/background-other_pages.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top center;
@@ -9,7 +9,7 @@ body {
 }
 
 #main_screen_for_app{
-  background-image: url("Images/background-index.png");
+  background-image: url("images/background-index.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top center;
@@ -32,7 +32,7 @@ a{
 }
 
 .main-header-subtitle{
-	font-size: 1.7em; 
+	font-size: 1.7em;
 	font-weight: 600;
 }
 
@@ -51,7 +51,7 @@ div #search_btn{
 	width: 20%;
 	margin-left: 28px;
 	padding: 5px 12px;
-	
+
 }
 
 div.form-group{
@@ -191,5 +191,5 @@ img {
 #timeString{
 	margin: auto;
 	text-align: center;
-	
+
 }
