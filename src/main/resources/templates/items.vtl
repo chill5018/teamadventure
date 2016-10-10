@@ -1,0 +1,26 @@
+
+<div class="main-header-container">
+  <p class="main-header-subtitle">Food items</p>
+</div>
+
+
+<div class="main-wrapper">
+    #if($items)
+     #foreach ($item in $items)
+      <div class="col-md-6 item-button">
+                  <div class="vbox">
+                   <img src=$item.getImageSrc() alt=$item.getName() />
+                   <button type=$item.getName() class="btn btn-blue">$item.getName()</button>
+                  </div>
+      </div>
+     #end
+    #else
+        <p>No items!</p>
+    #end
+    <div class="col-xs-12 item-button">
+
+        <form class="new_item" action="/items/new" method="get">
+            <button type="submit" class="btn btn-blue" >Add item</button>
+        </form>
+    </div>
+</div>
