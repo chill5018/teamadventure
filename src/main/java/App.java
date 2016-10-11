@@ -19,19 +19,19 @@ public class App {
     String layout = "templates/layout.vtl";
     String layoutIndex = "templates/layout-index.vtl";
     staticFileLocation("/public");
-      activities.add(new Activity("Kart-Go",370, 21, 6, 12,"/images/kart-go.jpg"));
+      activities.add(new Activity("Kart-Go",370, 21, 6, 12,"/Images/kart-go.jpg"));
       activities.get(activities.size()-1).setId(activities.size()-1);
-      activities.add(new Activity("Mini-Golf",210, 18, 20, 6,"/images/minigolf.jpg"));
+      activities.add(new Activity("Mini-Golf",210, 18, 20, 6,"/Images/minigolf.jpg"));
       activities.get(activities.size()-1).setId(activities.size()-1);
-      activities.add(new Activity("Paintball",200, 5, 20, 23, "/images/paintball.jpg"));
+      activities.add(new Activity("Paintball",200, 5, 20, 23, "/Images/paintball.jpg"));
       activities.get(activities.size()-1).setId(activities.size()-1);
-      activities.add(new Activity("Sumo",180, 6, 06, 18, "/images/sumo.png"));
+      activities.add(new Activity("Sumo",180, 6, 06, 18, "/Images/sumo.png"));
       activities.get(activities.size()-1).setId(activities.size()-1);
 
-      items.add(new Item("Popcorn", 20.00, "Deliciously fresh baked movie like butter popcorn", "/images/popcorn.jpg"));
-      items.add(new Item("Bacon", 13.99, "Fresh and saucy pig rear bacon", "/images/bacon.jpg"));
-      items.add(new Item("Coca-Cola", 13.32, "World wide knonw refreshment drink","images/coca-cola.JPG"));
-      items.add(new Item("Sparkling water", 15.43, "Refreshing and cooling natural source sparkling water","images/water.JPG"));
+      items.add(new Item("Popcorn", 20.00, "Deliciously fresh baked movie like butter popcorn", "/Images/popcorn.jpg"));
+      items.add(new Item("Bacon", 13.99, "Fresh and saucy pig rear bacon", "/Images/bacon.jpg"));
+      items.add(new Item("Coca-Cola", 13.32, "World wide knonw refreshment drink","Images/coca-cola.JPG"));
+      items.add(new Item("Sparkling water", 15.43, "Refreshing and cooling natural source sparkling water","Images/water.JPG"));
 
 
     // -----------------------------------//
@@ -145,18 +145,61 @@ public class App {
   }, new VelocityTemplateEngine());
 
 //Edit Booking
-  get("/bookings/edit", (request, response) -> {
+  get("/bookings/:id/edit", (request, response) -> {
    HashMap<String, Object> model = new HashMap<String, Object>();
+      int idEditB = Integer.parseInt(request.params(":id"));
+      model.put("booking", bookings.get(idEditB));
+      request.session().attribute("idEditB", idEditB);
    model.put("template", "templates/bookings-edit.vtl");
    return new ModelAndView(model, layout);
  }, new VelocityTemplateEngine());
 
-  // // View Booking with ID
-  // get("/bookings/:id", (request, response) -> {
-  //     HashMap<String, Object> model = new HashMap<String, Object>();
-  //     model.put("template", "templates/bookings.vtl");
-  //     return new ModelAndView(model, layout);
-  //   }, new VelocityTemplateEngine());
+      post("/booking/edit/success", (request, response) -> {
+          HashMap<String, Object> model = new HashMap<String, Object>();
+          int id = request.session().attribute("idEditB");
+          //Activity edit
+          String name = request.queryParams("Name");
+          String sPrice = request.queryParams("price");
+          String sTime = request.queryParams("time");
+          String sCapacity = request.queryParams("capacity");
+          String sMinAge = request.queryParams("minimum-age");
+
+          Double price = Double.parseDouble(sPrice);
+          int time = Integer.parseInt(sTime);
+          int capacity = Integer.parseInt(sCapacity);
+          int minAge = Integer.parseInt(sMinAge);
+          String imgSrc = request.queryParams("image-path");
+
+          bookings.get(id).getActivity().setName(name);
+          bookings.get(id).getActivity().setImgSrc(imgSrc);
+          bookings.get(id).getActivity().setCapacity(capacity);
+          bookings.get(id).getActivity().setMinAge(minAge);
+          bookings.get(id).getActivity().setPrice(price);
+          bookings.get(id).getActivity().setTime(time);
+
+          //Customer Edit
+          String fName = request.queryParams("first-Name");
+          String lName = request.queryParams("last-Name");
+          String sNumOfPeople = request.queryParams("number-of-people");
+          String sMinAgeC = request.queryParams("age-of-Youngest");
+          String phoneNum = request.queryParams("Phone");
+          String email = request.queryParams("email");
+
+
+          int minAgeC = Integer.parseInt(sMinAgeC);
+          int numPeople = Integer.parseInt(sNumOfPeople);
+
+          bookings.get(id).getCustomer().setAge(minAgeC);
+          bookings.get(id).getCustomer().setfName(fName);
+          bookings.get(id).getCustomer().setlName(lName);
+          bookings.get(id).getCustomer().setEmail(email);
+          bookings.get(id).getCustomer().setNumOfPeople(numPeople);
+          bookings.get(id).getCustomer().setTelNum(phoneNum);
+
+
+          model.put("template", "templates/booking-success.vtl");
+          return new ModelAndView(model, layout);
+      }, new VelocityTemplateEngine());
 
 
   post("/customers", (request, response) -> {
@@ -227,31 +270,6 @@ public class App {
       return new ModelAndView(model, layout);
   }, new VelocityTemplateEngine());
 
-    post("/activity", (request, response) -> {
-        HashMap<String, Object> model = new HashMap<String, Object>();
-        activities = new ArrayList<Activity>();
-        activities = request.session().attribute("activities");
-        if (activities == null) {
-            request.session().attribute("activities", activities);
-        }
-
-        String name = request.queryParams("name");
-        String sPrice = request.queryParams("price");
-        String sTime = request.queryParams("time");
-        String sCapacity = request.queryParams("capacity");
-        String sMinAge = request.queryParams("min-age");
-
-        Double price = Double.parseDouble(sPrice);
-        int time = Integer.parseInt(sTime);
-        int capacity = Integer.parseInt(sCapacity);
-        int minAge = Integer.parseInt(sMinAge);
-        String imgSrc = request.queryParams("imgSrc");
-        activities.add(new Activity(name,price,time,capacity,minAge,imgSrc));
-        activities.get(activities.size()-1).setId(activities.size()-1);
-        model.put("template", "templates/success-activity.vtl");
-
-        return new ModelAndView(model, layout);
-    }, new VelocityTemplateEngine());
 
     post("/activity/:id/edit", (request, response) -> {
         HashMap<String, Object> model = new HashMap<String, Object>();
@@ -302,6 +320,7 @@ public class App {
          activities.get(id).setTime(time);
          Booking aux = new Booking(activities.get(id));
          bookings.add(aux);
+         bookings.get(bookings.size()-1).setId(bookings.size()-1);
      model.put("template", "templates/customers-select.vtl");
      return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());
@@ -398,13 +417,7 @@ public class App {
  }, new VelocityTemplateEngine());
 
 
-   // "Save / Update" a booking
-   post("/bookings", (request, response) -> {
-     HashMap<String, Object> model = new HashMap<String, Object>();
-    //  model.put("bookings", Booking.all());
-     model.put("template", "templates/booking-success.vtl");
-     return new ModelAndView(model, layout);
-   }, new VelocityTemplateEngine());
+
 
 
    // View All Customers

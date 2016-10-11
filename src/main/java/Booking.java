@@ -35,7 +35,7 @@ public class Booking {
     this.customer = customer;
   }
 
-  public Activity getSelectedActivity() {
+  public Activity getActivity() {
     return selectedActivity;
   }
 
@@ -62,6 +62,10 @@ public class Booking {
 
   public int getId() {
    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
   }
 
   public double getTotalPrice() {

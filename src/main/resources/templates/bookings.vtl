@@ -25,9 +25,9 @@
             <td>$booking.getCustomer().getfName() $booking.getCustomer().getlName()</td>
             <td class="booking-list-signed-up pg-booking-table__rows--center-aligned">$booking.getCustomer().getNumOfPeople()</td>
             <td>$booking.getCustomer().getTelNum()</td>
-            <td class="pg-booking-table__rows--center-aligned"> $booking.getSelectedActivity().getName()</td>
-            <td class="pg-booking-table__rows--center-aligned"><a href='#edit'>Edit</a> </td>
-            <td class="pg-booking-table__rows--center-aligned"><a href='#cancel'>Cancel</a></td>
+            <td class="pg-booking-table__rows--center-aligned"> $booking.getActivity().getName()</td>
+            <td class="pg-booking-table__rows--center-aligned"><a href='/bookings/$booking.getId()/edit' >Edit</a> </td>
+            <td class="pg-booking-table__rows--center-aligned"><a action='$bookings.remove(booking)' >Cancel</a></td>
           </tr>
           #end
         </tbody>

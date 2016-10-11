@@ -105,6 +105,10 @@ public class Customer {
       return numOfPeople;
     }
 
+    public void setNumOfPeople(int numOfPeople) {
+        this.numOfPeople = numOfPeople;
+    }
+
     public static List<Customer> allCustomers() {
       return instances;
     }
