@@ -19,19 +19,19 @@ public class App {
     String layout = "templates/layout.vtl";
     String layoutIndex = "templates/layout-index.vtl";
     staticFileLocation("/public");
-      activities.add(new Activity("Kart-Go",370, 21, 6, 12,"/Images/kart-go.jpg"));
+      activities.add(new Activity("Kart-Go",370, 21, 6, 12,"/images/kart-go.jpg"));
       activities.get(activities.size()-1).setId(activities.size()-1);
-      activities.add(new Activity("Mini-Golf",210, 18, 20, 6,"/Images/minigolf.jpg"));
+      activities.add(new Activity("Mini-Golf",210, 18, 20, 6,"/images/minigolf.jpg"));
       activities.get(activities.size()-1).setId(activities.size()-1);
-      activities.add(new Activity("Paintball",200, 5, 20, 23, "/Images/paintball.jpg"));
+      activities.add(new Activity("Paintball",200, 5, 20, 23, "/images/paintball.jpg"));
       activities.get(activities.size()-1).setId(activities.size()-1);
-      activities.add(new Activity("Sumo",180, 6, 06, 18, "/Images/sumo.png"));
+      activities.add(new Activity("Sumo",180, 6, 06, 18, "/images/sumo.png"));
       activities.get(activities.size()-1).setId(activities.size()-1);
 
-      items.add(new Item("Popcorn", 20.00, "Deliciously fresh baked movie like butter popcorn", "/Images/popcorn.jpg"));
-      items.add(new Item("Bacon", 13.99, "Fresh and saucy pig rear bacon", "/Images/bacon.jpg"));
-      items.add(new Item("Coca-Cola", 13.32, "World wide knonw refreshment drink","Images/coca-cola.JPG"));
-      items.add(new Item("Sparkling water", 15.43, "Refreshing and cooling natural source sparkling water","Images/water.JPG"));
+      items.add(new Item("Popcorn", 20.00, "Deliciously fresh baked movie like butter popcorn", "/images/popcorn.jpg"));
+      items.add(new Item("Bacon", 13.99, "Fresh and saucy pig rear bacon", "/images/bacon.jpg"));
+      items.add(new Item("Coca-Cola", 13.32, "World wide knonw refreshment drink","images/coca-cola.JPG"));
+      items.add(new Item("Sparkling water", 15.43, "Refreshing and cooling natural source sparkling water","images/water.JPG"));
 
 
     // -----------------------------------//
@@ -312,15 +312,15 @@ public class App {
    }, new VelocityTemplateEngine());
 
    // Select Customer Type
-     post("/bookings/new/choose-customer-type", (request, response) -> {
+   post("/bookings/new/choose-customer-type", (request, response) -> {
      HashMap<String, Object> model = new HashMap<String, Object>();
-         int id = request.session().attribute("idBooking");
-         String sTime = request.queryParams("timebox");
-         int time = Integer.parseInt(sTime);
-         activities.get(id).setTime(time);
-         Booking aux = new Booking(activities.get(id));
-         bookings.add(aux);
-         bookings.get(bookings.size()-1).setId(bookings.size()-1);
+     int id = request.session().attribute("idBooking");
+     String sTime = request.queryParams("timebox");
+     int time = Integer.parseInt(sTime);
+     activities.get(id).setTime(time);
+     Booking aux = new Booking(activities.get(id));
+     bookings.add(aux);
+     bookings.get(bookings.size()-1).setId(bookings.size()-1);
      model.put("template", "templates/customers-select.vtl");
      return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());
@@ -411,7 +411,7 @@ public class App {
    String email = request.queryParams("email");
    Customer newCompany = new Customer(compName,fName, lName, phoneNum, email, null, 15, 2);
    customers.add(newCompany); // Add new Company to list of Companies
-
+   bookings.get(bookings.size()-1).setCustomer(newCompany);         
    model.put("template", "templates/company-success.vtl");
    return new ModelAndView(model, layout);
  }, new VelocityTemplateEngine());
