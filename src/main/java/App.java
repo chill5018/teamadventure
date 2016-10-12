@@ -1,5 +1,6 @@
 import spark.ModelAndView;
 import template.VelocityTemplateEngine;
+import java.util.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,26 +14,15 @@ public class App {
   private static ArrayList<Activity> activities = new ArrayList<>();
   private static ArrayList<Booking> bookings = new ArrayList<>();
   private static ArrayList<Item> items = new ArrayList<>();
+  static Demo demo = new Demo();
+
 
   public static void main(String[] args) {
+    setDemoData();
     // Set path of Layout
     String layout = "templates/layout.vtl";
     String layoutIndex = "templates/layout-index.vtl";
     staticFileLocation("/public");
-      activities.add(new Activity("Kart-Go",370, 21, 6, 12,"/images/kart-go.jpg"));
-      activities.get(activities.size()-1).setId(activities.size()-1);
-      activities.add(new Activity("Mini-Golf",210, 18, 20, 6,"/images/minigolf.jpg"));
-      activities.get(activities.size()-1).setId(activities.size()-1);
-      activities.add(new Activity("Paintball",200, 5, 20, 23, "/images/paintball.jpg"));
-      activities.get(activities.size()-1).setId(activities.size()-1);
-      activities.add(new Activity("Sumo",180, 6, 06, 18, "/images/sumo.png"));
-      activities.get(activities.size()-1).setId(activities.size()-1);
-
-      items.add(new Item("Popcorn", 20.00, "Deliciously fresh baked movie like butter popcorn", "/images/popcorn.jpg"));
-      items.add(new Item("Bacon", 13.99, "Fresh and saucy pig rear bacon", "/images/bacon.jpg"));
-      items.add(new Item("Coca-Cola", 13.32, "World wide knonw refreshment drink","images/coca-cola.JPG"));
-      items.add(new Item("Sparkling water", 15.43, "Refreshing and cooling natural source sparkling water","images/water.JPG"));
-
 
     // -----------------------------------//
     //               HOMEPAGE             //
@@ -216,7 +206,6 @@ public class App {
 
     ArrayList<Customer> customers = request.session().attribute("customers");
     if (customers == null) {
-      customers = new ArrayList<Customer>();
       request.session().attribute("customers", customers);
     }
 
@@ -227,16 +216,18 @@ public class App {
     String companyName = request.queryParams("comp_name");
     String fName = request.queryParams("first_name");
     String lName = request.queryParams("last_name");
-    // int numOfPeople = Integer.parseInt(request.queryParams("family_size"));
-    // int minAge = Integer.parseInt(request.queryParams("min_age"));
+    String sNumPeople = request.queryParams("family_size");
+    int numPeople = Integer.parseInt(sNumPeople);
+    String sMinAge = request.queryParams("min_age");
+    int minAge = Integer.parseInt(sMinAge);
     String phoneNum = request.queryParams("phone_number-indiv");
     String email = request.queryParams("email-indiv");
     Customer newCustomer;
       if (companyName != null) {
-          newCustomer = new Customer(companyName, fName, lName, phoneNum, email, null, 15, 2);
+          newCustomer = new Customer(companyName, fName, lName, phoneNum, email, "12-10-2016-17:00", minAge, numPeople);
       }
       else {
-          newCustomer = new Customer(fName, lName, phoneNum, email, null, 15, 2);
+          newCustomer = new Customer("Individual",fName, lName, phoneNum, email, "12-10-2016-19:00", minAge, numPeople);
       }
     customers.add(newCustomer); // Add new Customer to list of Customers
 
@@ -246,7 +237,7 @@ public class App {
 
   post("/activity", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
-      activities = new ArrayList<Activity>();
+      activities = demo.getActivities();
       activities = request.session().attribute("activities");
       if (activities == null) {
           request.session().attribute("activities", activities);
@@ -271,38 +262,38 @@ public class App {
   }, new VelocityTemplateEngine());
 
 
-    post("/activity/:id/edit", (request, response) -> {
-        HashMap<String, Object> model = new HashMap<String, Object>();
-        int id = Integer.parseInt(request.params(":id"));
-        String name = request.queryParams("name");
-        String sPrice = request.queryParams("price");
-        String sTime = request.queryParams("time");
-        String sCapacity = request.queryParams("capacity");
-        String sMinAge = request.queryParams("min-age");
+  post("/activity/:id/edit", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      int id = Integer.parseInt(request.params(":id"));
+      String name = request.queryParams("name");
+      String sPrice = request.queryParams("price");
+      String sTime = request.queryParams("time");
+      String sCapacity = request.queryParams("capacity");
+      String sMinAge = request.queryParams("min-age");
 
-        Double price = Double.parseDouble(sPrice);
-        int time = Integer.parseInt(sTime);
-        int capacity = Integer.parseInt(sCapacity);
-        int minAge = Integer.parseInt(sMinAge);
-        String imgSrc = request.queryParams("imgSrc");
+      Double price = Double.parseDouble(sPrice);
+      int time = Integer.parseInt(sTime);
+      int capacity = Integer.parseInt(sCapacity);
+      int minAge = Integer.parseInt(sMinAge);
+      String imgSrc = request.queryParams("imgSrc");
 
-        activities.get(id).setName(name);
-        activities.get(id).setImgSrc(imgSrc);
-        activities.get(id).setCapacity(capacity);
-        activities.get(id).setMinAge(minAge);
-        activities.get(id).setPrice(price);
-        activities.get(id).setTime(time);
-        model.put("template", "templates/success-activity.vtl");
+      activities.get(id).setName(name);
+      activities.get(id).setImgSrc(imgSrc);
+      activities.get(id).setCapacity(capacity);
+      activities.get(id).setMinAge(minAge);
+      activities.get(id).setPrice(price);
+      activities.get(id).setTime(time);
+      model.put("template", "templates/success-activity.vtl");
 
-        return new ModelAndView(model, layout);
-    }, new VelocityTemplateEngine());
+      return new ModelAndView(model, layout);
+  }, new VelocityTemplateEngine());
 
    // Booking Flow Step 2:
    get("/bookings/new/select-activity", (request, response) -> {
      HashMap<String, Object> model = new HashMap<String, Object>();
        bookings = request.session().attribute("bookings");
        if (bookings == null) {
-           bookings = new ArrayList<>();
+           bookings = demo.getBookings();
            request.session().attribute("bookings", bookings);
        }
 
@@ -355,7 +346,7 @@ public class App {
 
    customers = request.session().attribute("customers");
    if (customers == null) {
-     customers = new ArrayList<Customer>();
+     customers = demo.getCustomers();
      request.session().attribute("customers", customers);
    }
 
@@ -367,11 +358,13 @@ public class App {
 
    String fName = request.queryParams("first_name");
    String lName = request.queryParams("last_name");
-   // int numOfPeople = Integer.parseInt(request.queryParams("family_size"));
-   // int minAge = Integer.parseInt(request.queryParams("min_age"));
+   String sNumPeople = request.queryParams("family_size");
+   int numPeople = Integer.parseInt(sNumPeople);
+   String sMinAge = request.queryParams("min_age");
+   int minAge = Integer.parseInt(sMinAge);
    String phoneNum = request.queryParams("phone_number-indiv");
    String email = request.queryParams("email-indiv");
-   Customer newCustomer = new Customer(fName, lName, phoneNum, email, null, 15, 2);
+   Customer newCustomer = new Customer("Individual",fName, lName, phoneNum, email, "13-10-2016-15:00", minAge, numPeople);
    customers.add(newCustomer); // Add new Customer to list of Customers
      bookings.get(bookings.size()-1).setCustomer(newCustomer);
    model.put("template", "templates/customer-success.vtl");
@@ -405,13 +398,15 @@ public class App {
    String compName = request.queryParams("company_name");
    String fName = request.queryParams("first_name");
    String lName = request.queryParams("last_name");
-   //int numOfPeople = Integer.parseInt(request.queryParams("company_size"));
-   // int minAge = Integer.parseInt(request.queryParams("min_age"));
+   String sNumPeople = request.queryParams("company_size");
+   int numPeople = Integer.parseInt(sNumPeople);
+   String sMinAge = request.queryParams("min_age");
+   int minAge = Integer.parseInt(sMinAge);
    String phoneNum = request.queryParams("phone_number");
    String email = request.queryParams("email");
-   Customer newCompany = new Customer(compName,fName, lName, phoneNum, email, null, 15, 2);
+   Customer newCompany = new Customer(compName,fName, lName, phoneNum, email, "12-10-2016-18:00", numPeople, minAge);
    customers.add(newCompany); // Add new Company to list of Companies
-   bookings.get(bookings.size()-1).setCustomer(newCompany);         
+   bookings.get(bookings.size()-1).setCustomer(newCompany);
    model.put("template", "templates/company-success.vtl");
    return new ModelAndView(model, layout);
  }, new VelocityTemplateEngine());
@@ -460,7 +455,7 @@ public class App {
 
    post("/new-item", (request, response) -> {
        HashMap<String, Object> model = new HashMap<String, Object>();
-       items = new ArrayList<Item>();
+       items = demo.getItems();
        items = request.session().attribute("items");
        if (items == null) {
            request.session().attribute("items", items);
@@ -478,6 +473,15 @@ public class App {
 
        return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());
+
+  }
+
+
+  private static void setDemoData() {
+    customers = demo.getCustomers();
+    bookings = demo.getBookings();
+    activities = demo.getActivities();
+    items = demo.getItems();
 
   }
 }

@@ -22,7 +22,8 @@
         <tbody class="pg-table-body pg-booking-table__rows" data-bind="foreach: teachers">
           #foreach ($booking in $bookings)
           <tr class="pg-booking-table__row-header">
-            <td>$booking.getDate() </td> <!-- FIXME:  -->
+            <td>$booking.getCustomer().getReservationDate()</td>
+            <td>$booking.getCustomer().getCompanyName()</td>
             <td>$booking.getCustomer().getfName() $booking.getCustomer().getlName()</td>
             <td class="booking-list-signed-up pg-booking-table__rows--center-aligned">$booking.getCustomer().getNumOfPeople()</td>
             <td>$booking.getCustomer().getTelNum()</td>
@@ -33,14 +34,9 @@
           #end
         </tbody>
       </table>
-
-
       #else
         <p>No bookings!</p>
       #end
-
-
-
     </div>
   </div>
 </section>

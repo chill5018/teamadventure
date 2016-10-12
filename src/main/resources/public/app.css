@@ -156,7 +156,8 @@ th {
   padding-left: 5px;
   padding-right: 5px;
 	display: block;
-	margin: 0 auto;
+  margin: 90px auto;
+  width: 90%;
 }
 
 .new-booking__individual-button {
@@ -205,4 +206,10 @@ img {
 
 .item-button {
   margin-bottom: 15px;
+}
+
+/* Booking Overview  */
+
+.pg-booking-table, .pg-customer-table, .pg-activity-table{
+  text-align: center;
 }
